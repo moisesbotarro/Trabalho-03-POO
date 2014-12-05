@@ -31,9 +31,15 @@ public class WeaponShop implements Shop, Printable {
             option = input.nextInt();
 
             if ( option < 0 || option > 1 ){
-                System.out.println ("Opção Inválida!!!");
+                
+                // Caso ainda não se deseja sair do programa
+                if ( option != -1 ) {
+                    System.out.println ("Opção Inválida!!!");
+                    continue;
+                }
+                
+                // Caso tenha sido digitado o código para sair da loja
                 continue;
-
             }
 
             if ( option == 0 )
@@ -82,7 +88,7 @@ public class WeaponShop implements Shop, Printable {
             }
 
             // Arma escolhida pelo usuário
-            Weapon selectedWeapon = weaponsToSell.get( option-1 );
+            Weapon selectedWeapon = weaponsToSell.get( option - 1 );
 
             // Verifica se há dinheiro disponível para comprar
             if ( selectedWeapon.getPrice() > inventory.getTotalGold() ){
@@ -94,7 +100,7 @@ public class WeaponShop implements Shop, Printable {
             inventory.spendGold ( selectedWeapon.getPrice() );
             inventory.insertItem ( selectedWeapon );
 
-            System.out.println ("Obrigado pela compra!!. " + selectedWeapon.getName() + " já está no inventário de " + buyer.getName() );
+            System.out.println ("Obrigado pela compra!!. " + selectedWeapon.getName() + " já está no inventário de " + buyer.getName() +"\n");
         
         } while ( option != -1 );
 
@@ -110,7 +116,7 @@ public class WeaponShop implements Shop, Printable {
         // Variável para armazenar temporariamente o inventário do personagem
         Inventory inventory = seller.getInventory();
 
-        System.out.println ("Inventario de " + seller.getName() );
+        System.out.println ("\n\t\tINVENTARIO DE " + seller.getName() );
         inventory.print();
 
         String itemName;
@@ -119,38 +125,66 @@ public class WeaponShop implements Shop, Printable {
 
             System.out.println("Digite o nome do item que deseja vender. Digite -1 para sair");
             itemName = input.nextLine();
+            
+            //System.out.println ( "Teste:" + itemName );
 
             if ( itemName.equals ("-1") )
                 continue;
 
             // Retorna o item a ser vendido
             Item itemToSell = null;
-            inventory.searchItem ( itemName );
+            itemToSell = inventory.searchItem ( itemName );
 
             if ( itemToSell == null ){
-                System.out.println ("Item " + itemName + " não está no inventário de " + seller.getName() );
-
+                System.out.println ("Item " + itemName + " não está no inventário de " + seller.getName() + "\n");
+                continue;
             }
 
             // Remove item do inventário do personagem e adiciona seu valor no gold do personagem
             inventory.removeItem ( itemName );
             inventory.earnGold ( itemToSell.getPrice() );
 
-        } while ( itemName.equals("-1") );
+        } while ( !itemName.equals("-1") );
     }
 
 
     // Imprime as armas disponíves na loja para compra
     public void print(){
 
-        System.out.println ("Available Weapons:");
+        System.out.println ("\t\tAVAILABLE WEAPONS:");
 
-        int i = 0;
+        int i = 1;
 
         for ( Weapon weapon : weaponsToSell ){
             System.out.println ("Opção " + i + ":");
             weapon.print();
             System.out.println();
+            i++;
         }
+    }
+    
+    public static void main ( String agrgs[] ){
+    
+        Knight cloud = new Knight ("Cloud", 20);
+        
+        Inventory inventory = cloud.getInventory();
+        inventory.setSpaces(10);
+        inventory.earnGold(300000);
+        
+        Weapon ultimaW = new Weapon ("UltimaWeapon Sword", 9999, 9, 10.5);
+        Weapon wizardS = new Weapon ("Wizard Staff", 8000, 5, 8.5);
+        Weapon stlPhone = new Weapon ("Starlight Phone", 6000, 6, 5.5);
+        HealthPotion hpPotion = new HealthPotion ("HP Potion", 10, 10);
+
+        
+        cloud.storeItem ( hpPotion );
+        ArrayList<Weapon> loja = new ArrayList<Weapon>();
+        loja.add( ultimaW );
+        loja.add( wizardS );
+        loja.add( stlPhone );
+        
+        WeaponShop weaponShop = new WeaponShop ( loja );
+        
+        weaponShop.goShopping ( cloud );
     }
 }

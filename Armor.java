@@ -125,10 +125,10 @@ public class Armor extends Item implements Printable{
     //Método da interface Printable que imprime as características de um weapon
     public void print () {
 
-        System.out.println ( "\n===== ARMOR INFO ======" );
-        System.out.println ( "Nome: " + this.getName() );
-        System.out.println ( "Preço: " + this.getPrice );
-        System.out.println ( "Pontos de DeFesa: " + this.getDefensePts() );
-        System.out.println ( "Weight: " + this.getWeight() );
+        System.out.println ( "\n\t===== ARMOR INFO ======" );
+        System.out.println ( "\tNome: " + this.getName() );
+        System.out.println ( "\tPreço: " + this.getPrice );
+        System.out.println ( "\tPontos de DeFesa: " + this.getDefensePts() );
+        System.out.println ( "\tWeight: " + this.getWeight() );
     }
 }

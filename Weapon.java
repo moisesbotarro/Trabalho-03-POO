@@ -110,10 +110,10 @@ public class Weapon extends Item implements Printable {
     //Método da interface Printable que imprime as características de um weapon
     public void print () {
 
-        System.out.println ( "\n===== WEAPON INFO ======" );
-        System.out.println ( "Nome: " + this.getName() );
-        System.out.println ( "Preço: " + this.getPrice() );
-        System.out.println ( "Pontos de Ataque: " + this.getAttackPts() );
-        System.out.println ( "Range: " + this.getRange() );
+        System.out.println ( "\n\t===== WEAPON INFO ======" );
+        System.out.println ( "\tNome: " + this.getName() );
+        System.out.println ( "\tPreço: " + this.getPrice() );
+        System.out.println ( "\tPontos de Ataque: " + this.getAttackPts() );
+        System.out.println ( "\tRange: " + this.getRange() );
     }
 }
