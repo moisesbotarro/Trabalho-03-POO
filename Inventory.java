@@ -6,7 +6,7 @@
 
 import java.util.*;
 
-public class Inventory{
+public class Inventory implements Printable {
 
     /* Atributos */
     
@@ -373,107 +373,17 @@ public class Inventory{
     
     
     /* Método auxiliar para imprimir os itens de um inventário */
-    public void printInventory () {
+    public void print() {
         
         System.out.println ("\nITENS DO INVENTARIO:");
         
         for ( GenericPair<Item, Boolean> pair : items ) {
             
             // Chama o método de impressão das informações de cada Item. É específico de cada item especializado
-            pair.getFirst().printInfo();
+            pair.getFirst().print();
             System.out.println ("\tEquipado: " + pair.getSecond() );
         }
         System.out.println ("\n");
-    }
-    
-    // Programa de teste da classe Inventory e das subclasses de Item
-    public static void main ( String args[] ){
-    
-        Knight ch = new Knight ("Moises", 20);
-        
-        HealthPotion hp1 = new HealthPotion( "Cure", 20, 100 );
-        HealthPotion hp2 = new HealthPotion( "Cura", 40, 200 );
-        ManaPotion mp1 = new ManaPotion ( "MP Restore 1", 40, 200 );
-        ManaPotion mp2 = new ManaPotion ( "MP Restore 2", 80, 300 );
-    
-        Weapon wp1 = new Weapon( "Faca", 9.99, 1, 10 );
-        Weapon wp2 = new Weapon( "Lança", 20, 6, 20 );
-        Weapon wp3 = new Weapon( "Espada", 100, 18, 15 );
-        
-        Armor a1 = new Armor ( "Escudo de Madeira", 9.99, 2, 20 );
-        Armor a2 = new Armor ( "Escudo de Aço", 20, 4, 70 );
-        Armor a3 = new Armor ( "Escudo de Titanio", 100, 9, 10 );
-        
-        ch.storeItem ( hp1 );
-        
-        ch.addSpacesInInventory(10);
-        
-        ch.storeItem (hp1);
-        ch.storeItem (hp2);
-        ch.storeItem (mp1);
-        ch.storeItem (mp2);
-        ch.storeItem (wp1);
-        ch.storeItem (wp2);
-        ch.storeItem (wp3);
-        ch.storeItem (a1);
-        ch.storeItem (a2);
-        ch.storeItem (a3);
-        
-        ch.printGameCharacterInventory();
-        
-        ch.useItem ("Curaga");
-        ch.useItem ("Cure");
-        ch.useItem ("MP Restore 1");
-
-
-        ch.equipItem ( "Espada" );
-        ch.equipItem ( "Escudo de Madeira" );
-        ch.equipItem ( "Escudo de Titanio" );
-        ch.equipItem ( "Escudo de Aço" );
-        
-        ch.equipItem ( "Escudo de Madeira" );
-        ch.equipItem ( "Espada" );
-        ch.equipItem ( "Lança" );
-        ch.equipItem ( "Faca" );
-        
-        System.out.println("\nARMAS EQUIPADAS: " + ch.howManyEquippedWeapons() );
-        System.out.println("ARMADURAS EQUIPADAS: " + ch.howManyEquippedArmors() );
-        
-        System.out.println("\nITEMS ATTACK PTS: " + ch.getItemsAttackPts() );
-        System.out.println("ITEMS DEFENSE PTS: " + ch.getItemsDefensePts() );
-        
-        ch.printGameCharacterInventory();
-    
-        ch.unequipItem ( "Escudo de Aco" );
-        ch.unequipItem ( "Escudo de Madeira" );
-        
-        ch.unequipItem ( "Espada" );
-        ch.unequipItem ( "Escudo de Titanio" );
-        
-        ch.printGameCharacterInventory();
-        
-        System.out.println( "\nNUMERO DE ARMAS EQUIPADAS: " + ch.howManyEquippedWeapons() );
-        System.out.println( "NUMERO DE ARMADURAS EQUIPADAS: " + ch.howManyEquippedArmors() );
-        
-        System.out.println( "\nITEMS ATTACK PTS: " + ch.getItemsAttackPts() );
-        System.out.println( "ITEMS DEFENSE PTS: " + ch.getItemsDefensePts() );
-        
-        ch.equipItem ( "Escudo de Titanio");
-        ch.equipItem ( "Faca" );
-        
-        System.out.println( "\nITEMS ATTACK PTS: " + ch.getItemsAttackPts() );
-        System.out.println( "ITEMS DEFENSE PTS: " + ch.getItemsDefensePts() );
-        
-        ch.printGameCharacterInventory();
-        
-        ch.discartItem ("Espada");
-        ch.discartItem ("Lança");
-        ch.discartItem ("Faca");
-        ch.discartItem ("Escudo de Madeira");
-        ch.discartItem ("Escudo de Titanio");
-        ch.discartItem ("Espada");
-        
-        ch.printGameCharacterInventory();
     }
 }
 
