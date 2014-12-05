@@ -310,7 +310,7 @@ public abstract class GameCharacter implements Printable {
     public void printGameCharacterInventory(){
         
         // Chama o método de Inventory
-        myItems.printInventory();
+        myItems.print();
     }
     
     // Método auxiliar para retornar o atributo speed de um personagem. Se tiver com uma armadura equipada, retorna o speed com a penalidade
@@ -353,6 +353,12 @@ public abstract class GameCharacter implements Printable {
     public int getItemsDefensePts(){
     
         return myItems.getItemsDefensePts();
+    }
+    
+    // Método para retornar o inventário de um personagem
+    public Inventory getInventory() {
+        
+        return myItems;
     }
     
     // Método auxiliar para imprimir atributos de um personagem

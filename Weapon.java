@@ -112,7 +112,7 @@ public class Weapon extends Item implements Printable {
 
         System.out.println ( "\n===== WEAPON INFO ======" );
         System.out.println ( "Nome: " + this.getName() );
-        System.out.println ( "Preço: " + this.getPrice );
+        System.out.println ( "Preço: " + this.getPrice() );
         System.out.println ( "Pontos de Ataque: " + this.getAttackPts() );
         System.out.println ( "Range: " + this.getRange() );
     }
