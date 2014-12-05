@@ -163,6 +163,10 @@ public class Inventory implements Printable {
             
             if ( items.get(i).getFirst().getName().equals(itemName) ) {
                 
+                // Se o item estiver equipado, deve desequipá-lo antes de removê-lo
+                if ( items.get(i).getSecond() == true )
+                    unequipItem ( itemName );
+                
                 items.remove(i); //Remove o Pair item-status. O método já reorganiza o vetor resultante
                 return; // Já pode encerrar o método
             }
@@ -182,7 +186,10 @@ public class Inventory implements Printable {
             return;
         }
         
-        // Remove o Pair item-status da posição desejada
+        // Remove o Pair item-status da posição desejada. Se o item estiver equipado, deve desequipá-lo antes
+        if ( items.get(itemPosition).getSecond() == true )
+            unequipItem ( items.get(itemPosition).getFirst().getName() );
+        
         items.remove ( itemPosition );
     }
     

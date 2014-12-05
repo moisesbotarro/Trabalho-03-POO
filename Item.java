@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe Item
  */
 
-public abstract class Item {
+public abstract class Item implements Printable {
 
     /* Atributos */
     private String name;
@@ -59,6 +59,6 @@ public abstract class Item {
     // Método auxiliar para desequipar um item. Deve ser implementado nas classes filhas
     public abstract void unequip ( GameCharacter character, Inventory inventory );
     
-    // Método auxiliar para imprimir informações de um item. Deve ser implementado nas classes filhas 
-    public abstract void printInfo ();
+    // Método para imprimir informações de um item
+    public abstract void print ();
 }
