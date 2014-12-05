@@ -6,7 +6,7 @@
 
 import java.util.*;
 
-public abstract class GameCharacter {
+public abstract class GameCharacter implements Printable {
 
     /* Atributos */
     private String alias;
@@ -356,7 +356,7 @@ public abstract class GameCharacter {
     }
     
     // Método auxiliar para imprimir atributos de um personagem
-    public void printInfo(){
+    public void print(){
 
         System.out.println ( "\n===== CHARACTER INFO ======" );
         System.out.println ( "Nome: " + alias );
