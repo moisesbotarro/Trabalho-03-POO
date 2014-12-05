@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe ManaPotion
  */
 
-public class ManaPotion extends Potion{
+public class ManaPotion extends Potion implements Printable{
 
     /* Métodos */
     
@@ -27,12 +27,12 @@ public class ManaPotion extends Potion{
         character.discartItem ( this.getName() );
     }
     
-    // Método para imprimir informações sobre o Item
-    public void printInfo(){
-        
-        System.out.println ( "MANA POTION: " + this.getName() );
-        System.out.println ( "\tPreço: " + this.getPrice() );
-        System.out.println ( "\tRestorePts: " + this.getDefensePts() );
-        
+    //Método da interface Printable que imprime as características de um weapon
+    public void print () {
+
+        System.out.println ( "\n===== MANA POTION INFO ======" );
+        System.out.println ( "Nome: " + this.getName() );
+        System.out.println ( "Preço: " + this.getPrice );
+        System.out.println ( "Restore Points: " + this.getDefensePts() );
     }
 }
