@@ -6,7 +6,7 @@
 
 import java.util.*;
 
-public class Thief extends GameCharacter{
+public class Thief extends GameCharacter implements Printable{
 
     /* Atributos */
     protected int stealth;

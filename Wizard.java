@@ -6,7 +6,7 @@
 
 import java.util.*;
 
-public class Wizard extends GameCharacter{
+public class Wizard extends GameCharacter implements Printable{
 
     /* Atributos */
     protected int wisdom;
