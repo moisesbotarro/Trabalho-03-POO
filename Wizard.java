@@ -46,7 +46,7 @@ public class Wizard extends GameCharacter{
         this.wisdom += moreWisdom;
     }
 
-    //Método da interface Printable que imprime as características de um knight
+    //Método da interface Printable que imprime as características de um wizard
     public void print () {
 
         System.out.println ( "\n===== WIZARD INFO ======" );

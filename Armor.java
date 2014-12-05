@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe Armor
  */
 
-public class Armor extends Item {
+public class Armor extends Item implements Printable{
 
     /* Atributos */
     protected int defensePts;
@@ -128,7 +128,7 @@ public class Armor extends Item {
         System.out.println ( "\n===== ARMOR INFO ======" );
         System.out.println ( "Nome: " + this.getName() );
         System.out.println ( "Preço: " + this.getPrice );
-        System.out.println ( "Pontos de Deesa: " + this.getDefensePts() );
+        System.out.println ( "Pontos de DeFesa: " + this.getDefensePts() );
         System.out.println ( "Weight: " + this.getWeight() );
     }
 }

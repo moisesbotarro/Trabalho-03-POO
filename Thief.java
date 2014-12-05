@@ -46,7 +46,7 @@ public class Thief extends GameCharacter{
         this.stealth += moreStealth;
     }
 
-    //Método da interface Printable que imprime as características de um knight
+    //Método da interface Printable que imprime as características de um thief
     public void print () {
 
         System.out.println ( "\n===== THIEF INFO ======" );
