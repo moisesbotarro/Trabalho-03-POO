@@ -122,25 +122,13 @@ public class Armor extends Item {
         }
     }
     
-    // Método auxiliar para imprimir informaçõe do Item
-    public void printInfo(){
-        System.out.println ( "ARMADURA: " + this.getName() );
-        System.out.println ( "\tPreço: " + this.getPrice() );
-        System.out.println ( "\tDenfensePts: " + this.getDefensePts() );
-        System.out.println ( "\tWeight: " + this.getWeight() );
-    }
-    
-    // Método para teste da classe
-    public static void main ( String args[] ){
-    
-        Armor a1 = new Armor ( "Escudo de Madeira", 1, -2, 1);
-        Armor a2 = new Armor ( "Escudo de Aço", 1, 6, 10);
-        Armor a3 = new Armor ( "Escudo de Ferro", 1, 22, 20);
-        Armor a4 = new Armor ( a3 );
-        
-        a1.printInfo();
-        a2.printInfo();
-        a3.printInfo();
-        a4.printInfo();
+    //Método da interface Printable que imprime as características de um weapon
+    public void print () {
+
+        System.out.println ( "\n===== ARMOR INFO ======" );
+        System.out.println ( "Nome: " + this.getName() );
+        System.out.println ( "Preço: " + this.getPrice );
+        System.out.println ( "Pontos de Deesa: " + this.getDefensePts() );
+        System.out.println ( "Weight: " + this.getWeight() );
     }
 }
