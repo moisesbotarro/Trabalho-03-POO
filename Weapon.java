@@ -106,20 +106,6 @@ public class Weapon extends Item implements Weapon {
             inventory.setNumberOfEquippedWeapons ( inventory.howManyEquippedWeapons() - 1 );
         }
     }
-    
-    // Método para teste da classe
-    public static void main ( String args[] ){
-    
-        Weapon w1 = new Weapon( "faca", 10, 0, 70);
-        Weapon w2 = new Weapon( "espada", 20, 10, 50);
-        Weapon w3 = new Weapon( "adaga", 30, 6, 70);
-        Weapon w4 = new Weapon( w3 );
-        
-        w1.printInfo();
-        w2.printInfo();
-        w3.printInfo();
-        w4.printInfo();
-    }
 
     //Método da interface Printable que imprime as características de um weapon
     public void print () {
