@@ -12,44 +12,11 @@ public class Inventory{
     
     private int spaces; //Espaço total do inventário (incluindo espaço utilizado e livre)
     private double gold;
-    private ArrayList<Pair> items;
+    private ArrayList<GenericPair<Item, Boolean>> items;
     
     /* Atributos auxiliares criados a parte para guardar a quantidade de armas e armaduras equipadas */
     private int nEquippedWeapons;
     private int nEquippedArmors;
-    
-    /* Classe privada interna para permitir armazenar no ArrayList um par: Item, boolean */
-    
-    private class Pair{
-        
-        private Item item;
-        private boolean equipped; // Variável que indicar o item está equipado ou não
-        
-        // Construtor
-        public Pair ( Item item, boolean equipped ){
-            
-            this.item = item;
-            this.equipped = equipped;
-        }
-        
-        // Método para retornar o item armazenado em Pair
-        public Item getItem(){
-            
-            return item;
-        }
-        
-        // Método para indicar se o item está equipado ou não
-        public boolean isEquipped(){
-            
-            return equipped;
-        }
-        
-        // Método para mudar o status de um item (equipado ou não equipado)
-        public void setStatus( boolean newStatus ){
-            
-            this.equipped = newStatus;
-        }
-    }
     
     /* Métodos */
     
@@ -60,7 +27,7 @@ public class Inventory{
         
         spaces = 0;
         gold = 0;
-        items = new ArrayList<Pair>();
+        items = new ArrayList<GenericPair<Item, Boolean>>();
         nEquippedWeapons = 0;
         nEquippedArmors = 0;
     }
@@ -148,10 +115,10 @@ public class Inventory{
     public Item searchItem ( String itemName ){
     
         // Percorre o inventário buscando a primeira ocorrência do Item
-        for (int i = 0; i < items.size(); i++ ) {
+        for ( GenericPair<Item, Boolean> pair : items) {
         
-            if ( items.get(i).getItem().getName().equals(itemName) ){
-                return items.get(i).getItem();
+            if ( pair.getFirst().getName().equals(itemName) ){
+                return pair.getFirst();
             }
         }
         
@@ -168,14 +135,14 @@ public class Inventory{
             return null;
         }
         
-        return items.get( itemPosition ).getItem();
+        return items.get( itemPosition ).getFirst();
     }
     
     // Método para inserir um ítem no inventário - Será suposto que o item inserido não está equipado ainda
     public void insertItem ( Item itemToInsert ) {
         
         // Cria um objeto pair para conter o item e o status dele (não equipado)
-        Pair pairToInsert = new Pair ( itemToInsert, false );
+        GenericPair<Item, Boolean> pairToInsert = new GenericPair<Item, Boolean> ( itemToInsert, false );
         
         // Deve-se verificar se há espaço para inserir um novo item
         if ( items.size() >= spaces ) {
@@ -194,7 +161,7 @@ public class Inventory{
         // Busca no vetor a primeira ocorrência do item e o remove dessa posição
         for ( int i = 0; i < items.size(); i++ ) {
             
-            if ( items.get(i).getItem().getName().equals(itemName) ) {
+            if ( items.get(i).getFirst().getName().equals(itemName) ) {
                 
                 items.remove(i); //Remove o Pair item-status. O método já reorganiza o vetor resultante
                 return; // Já pode encerrar o método
@@ -263,15 +230,15 @@ public class Inventory{
         boolean alreadyEquipped = false;
         
         // Percorre o inventário buscando a primeira ocorrência do Item
-        for (int i = 0; i < items.size(); i++ ) {
+        for ( GenericPair<Item, Boolean> pair : items ) {
         
             // Ao achar o item, muda seu status para equipado se ele estiver desequipado
-            if ( items.get(i).getItem().getName().equals (itemName) ){
+            if ( pair.getFirst().getName().equals (itemName) ){
                 
                 // Somente equipa se ele estiver desequipado.
-                if ( (items.get(i).isEquipped() == false) ){
+                if ( ( pair.getSecond() == false ) ){
                 
-                    items.get(i).setStatus( true );
+                    pair.setSecond( true );
                     return true;
                 }
                 
@@ -298,16 +265,16 @@ public class Inventory{
         boolean unequipped = false; // Variável para indicar se desequipou o item
         
         // Procura pela primeira ocorrência do item a ser desequipado
-        for ( int i = 0; i < items.size(); i++ ){
+        for ( GenericPair<Item, Boolean> pair : items ){
         
-            item = items.get(i).getItem();
-            status = items.get(i).isEquipped();
+            item = pair.getFirst();
+            status = pair.getSecond();
             
             // Se for o ítem procurado e ele estiver equipado
             if ( item.getName().equals (itemName) && status == true ){
             
                 // Desequipa o item
-                items.get(i).setStatus (false);
+                pair.setSecond (false);
                 unequipped = true;
                 break;
             }
@@ -330,10 +297,10 @@ public class Inventory{
         boolean auxStatus;
         
         // Percorre o Inventário, somando o poder de ataque de todos os itens equipados. Como getAttackPts() de armadura retorna 0 e poções não estão equipadas ( seu getAttackPts() retorna -1 ), basta somar o retorno de getAttackPts() dos itens equipados.
-        for ( int i = 0; i < items.size(); i++ ){
+        for ( GenericPair<Item, Boolean> pair : items ){
         
-            auxItem = items.get(i).getItem();
-            auxStatus = items.get(i).isEquipped();
+            auxItem = pair.getFirst();
+            auxStatus = pair.getSecond();
             
             // Se o item estiver equipado
             if ( auxStatus == true ){
@@ -353,10 +320,10 @@ public class Inventory{
         boolean auxStatus;
         
         // Percorre o Inventário, somando o poder de defesa de todos os itens equipados. Como geDefensePts() de arma retorna 0 e poções não estão equipadas ( seu getDefensePts() retorna restaurePts ), basta somar o retorno de getDefensePts() dos itens equipados.
-        for ( int i = 0; i < items.size(); i++ ){
+        for ( GenericPair<Item, Boolean> pair : items ){
         
-            auxItem = items.get(i).getItem();
-            auxStatus = items.get(i).isEquipped();
+            auxItem = pair.getFirst();
+            auxStatus = pair.getSecond();
             
             // Se o ítem estiver equipado
             if ( auxStatus == true ){
@@ -410,11 +377,11 @@ public class Inventory{
         
         System.out.println ("\nITENS DO INVENTARIO:");
         
-        for ( int i = 0; i < items.size(); i++ ) {
+        for ( GenericPair<Item, Boolean> pair : items ) {
             
             // Chama o método de impressão das informações de cada Item. É específico de cada item especializado
-            items.get(i).getItem().printInfo();
-            System.out.println ("\tEquipado: " + items.get(i).isEquipped() );
+            pair.getFirst().printInfo();
+            System.out.println ("\tEquipado: " + pair.getSecond() );
         }
         System.out.println ("\n");
     }
@@ -426,8 +393,8 @@ public class Inventory{
         
         HealthPotion hp1 = new HealthPotion( "Cure", 20, 100 );
         HealthPotion hp2 = new HealthPotion( "Cura", 40, 200 );
-        ManaPotion mp1 = new ManaPotion ( "MP Restore 1", 40, 100 );
-        ManaPotion mp2 = new ManaPotion ( "MP Restore 2", 80, 200 );
+        ManaPotion mp1 = new ManaPotion ( "MP Restore 1", 40, 200 );
+        ManaPotion mp2 = new ManaPotion ( "MP Restore 2", 80, 300 );
     
         Weapon wp1 = new Weapon( "Faca", 9.99, 1, 10 );
         Weapon wp2 = new Weapon( "Lança", 20, 6, 20 );
