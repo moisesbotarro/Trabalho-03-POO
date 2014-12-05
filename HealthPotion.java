@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe HealthPotion
  */
 
-public class HealthPotion extends Potion{
+public class HealthPotion extends Potion implements Printable{
 
     /* Métodos */
     
