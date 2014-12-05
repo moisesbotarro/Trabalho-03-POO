@@ -45,4 +45,21 @@ public class Wizard extends GameCharacter{
         
         this.wisdom += moreWisdom;
     }
+
+    //Método da interface Printable que imprime as características de um knight
+    public void print () {
+
+        System.out.println ( "\n===== WIZARD INFO ======" );
+        System.out.println ( "Nome: " + alias );
+        System.out.println ( "HP: " + HP );
+        System.out.println ( "MP: " + MP );
+        System.out.println ( "XP: " + XP );
+        System.out.println ( "Stregth: " + strength );
+        System.out.println ( "Speed: " + getSpeed() );
+        System.out.println ( "Dexterity: " + dexterity );
+        System.out.println ( "Constitution: " + constitution );
+        System.out.println ( "Wisdom " + wisdom );
+        System.out.println ( "Nro. de Armas Equipadas: " + howManyEquippedWeapons() );
+        System.out.println ( "Nro. de Armaduras Equipadas: " + howManyEquippedArmors() + '\n');
+    }
 }
