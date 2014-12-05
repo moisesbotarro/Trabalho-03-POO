@@ -107,14 +107,6 @@ public class Weapon extends Item implements Weapon {
         }
     }
     
-    // Método auxiliar para imprimir atributos da arma
-    public void printInfo() {
-        System.out.println ( "ARMA: " + this.getName() );
-        System.out.println ( "\tPreço: " + this.getPrice() );
-        System.out.println ( "\tAttackPts: " + this.getAttackPts() );
-        System.out.println ( "\tRange: " + this.getRange() );
-    }
-    
     // Método para teste da classe
     public static void main ( String args[] ){
     
@@ -133,9 +125,9 @@ public class Weapon extends Item implements Weapon {
     public void print () {
 
         System.out.println ( "\n===== THIEF INFO ======" );
-        System.out.println ( "Nome: " + name );
-        System.out.println ( "Preço: " + price );
-        System.out.println ( "Pontos de Ataque: " + attackpts );
-        System.out.println ( "Range: " + range );
+        System.out.println ( "Nome: " + this.getName() );
+        System.out.println ( "Preço: " + this.getPrice );
+        System.out.println ( "Pontos de Ataque: " + this.getAttackPts() );
+        System.out.println ( "Range: " + this.getRange() );
     }
 }
