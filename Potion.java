@@ -51,6 +51,6 @@ public abstract class Potion extends Item {
     }
     
     // Método para inprimir informações sobre o item. Deve ser implementado nas classes filhas
-    public abstract void printInfo();
+    public abstract void print();
 
 }
