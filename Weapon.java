@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe Weapon
  */
 
-public class Weapon extends Item {
+public class Weapon extends Item implements Weapon {
     
     /* Atributos */
     protected int attackPts;
@@ -127,5 +127,15 @@ public class Weapon extends Item {
         w2.printInfo();
         w3.printInfo();
         w4.printInfo();
+    }
+
+    //Método da interface Printable que imprime as características de um weapon
+    public void print () {
+
+        System.out.println ( "\n===== THIEF INFO ======" );
+        System.out.println ( "Nome: " + name );
+        System.out.println ( "Preço: " + price );
+        System.out.println ( "Pontos de Ataque: " + attackpts );
+        System.out.println ( "Range: " + range );
     }
 }
