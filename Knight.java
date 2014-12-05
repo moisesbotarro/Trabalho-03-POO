@@ -50,9 +50,9 @@ public class Knight extends GameCharacter implements Printable{
     public void print () {
 
         System.out.println ( "\n===== KNIGHT INFO ======" );
-        System.out.println ( "Nome: " + alias );
-        System.out.println ( "HP: " + HP );
-        System.out.println ( "MP: " + MP );
+        System.out.println ( "Nome: " + getName() );
+        System.out.println ( "HP: " + getHP() );
+        System.out.println ( "MP: " + getMP() );
         System.out.println ( "XP: " + XP );
         System.out.println ( "Stregth: " + strength );
         System.out.println ( "Speed: " + getSpeed() );

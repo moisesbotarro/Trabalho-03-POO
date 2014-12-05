@@ -32,7 +32,7 @@ public class HealthPotion extends Potion implements Printable{
 
         System.out.println ( "\n===== HEALTH POTION INFO ======" );
         System.out.println ( "Nome: " + this.getName() );
-        System.out.println ( "Preço: " + this.getPrice );
+        System.out.println ( "Preço: " + this.getPrice() );
         System.out.println ( "Restore Points: " + this.getDefensePts() );
     }
 }
