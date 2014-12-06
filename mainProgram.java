@@ -55,6 +55,8 @@ public class mainProgram {
 
 	}	
 
+	public static void printAllChars()
+
 	//0000000000000000000000000000000000000000000000000000000000000000000000000
 	//0000000000000000000000000000000000000000000000000000000000000000000000000
 	public static void listTeam(Team tm) {
@@ -276,6 +278,52 @@ public class mainProgram {
 		potionshop.goShopping(ch);
 	}
 
+	public static void battle () {
+
+		Scanner scan = new Scanner( System.in );
+		String team_name1, team_name2;
+		int index1, index2;
+
+		if(teams.size()<2)
+		{
+			System.out.println("ERRO - NUMERO DE TIMES INSUFICIENTE");
+			return;
+		}
+
+		System.out.println("Selecione primeiro time da batalha: ");
+		
+		for (int i=0; i<teams.size(); i++)
+		{
+			System.out.println( i + " - " + teams.get(i).getName());
+		}
+
+		index1 = scan.nextInt();
+
+		if (index1<0 || index1>teams.size())
+		{
+			System.out.println ("ERRO - SELEÇÃO INVÁLIDA DE TIME");
+			return;
+		}
+
+		for (int i=0; i<teams.size(); i++)
+		{
+			if(i!=index1) {
+				System.out.println( i + " - " + teams.get(i).getName());
+			}
+		}
+
+		index2 = scan.nextInt();
+
+		if (index2<0 || index2>teams.size())
+		{
+			System.out.println ("ERRO - SELEÇÃO INVÁLIDA DE TIME");
+			return;
+		}
+
+		startBattle(teams.get(index1), teams.get(index2));
+
+	}
+
 	public static void fillLists() {
 
 		Armor ar1, ar2, ar3, ar4, ar5;
@@ -323,6 +371,102 @@ public class mainProgram {
 
 	}
 
+	public static void startBattle ( Team team1, Team team2 ){
+    
+        // Vetor de Threads para gerenciar os ataques do Time 1
+        ArrayList<AttackThread> threadsTeam1 = new ArrayList<AttackThread>( team1.size() );
+        
+        // Vetor de Threads para gerenciar os ataques do Time 2
+        ArrayList<AttackThread> threadsTeam2 = new ArrayList<AttackThread>( team2.size() );
+        
+        // Percorre o time 1, preparando seus personagens para atacar
+        for ( int i = 0; i < team1.size(); i++ ){
+            
+            // Prepara a thread para o ataque do personagem
+            AttackThread newAttackThread = new AttackThread( team1.searchChar(i), team2.getRandomCharacter() );
+            
+            // Insere a thread no vetor de threads do time 1
+            threadsTeam1.add( newAttackThread );
+        }
+        
+        // Percorre o time 2, preparando seus personagens para atacar
+        for ( int i = 0; i < team2.size(); i++ ){
+            
+            // Prepara a thread para o ataque do personagem
+            AttackThread newAttackThread = new AttackThread( team2.searchChar(i), team1.getRandomCharacter() );
+            
+            // Insere a thread no vetor de threads do time 1
+            threadsTeam2.add( newAttackThread );
+            
+        }
+        
+        System.out.println ("================================= THE BATTLE BEGINS =================================\n\n");
+        
+        // Inicializa os ataques dos dois times, de forma intercalada
+        
+        int startedAttacksTeam1 = 0;
+        int startedAttacksTeam2 = 0;
+        
+        while ( startedAttacksTeam1 < team1.size() && startedAttacksTeam2 < team2.size() ){
+            
+            threadsTeam1.get(startedAttacksTeam1).start();
+            threadsTeam2.get(startedAttacksTeam2).start();
+            
+            startedAttacksTeam1++;
+            startedAttacksTeam2++;
+            
+        }
+        
+        // Se ainda há personagens no Time 1 para atacar
+        while ( startedAttacksTeam1 < team1.size() ){
+            
+            threadsTeam1.get(startedAttacksTeam1).start();
+            startedAttacksTeam1++;
+        
+        }
+        
+        
+        // Se ainda há personagens no Time 2 para atacar
+        while ( startedAttacksTeam2 < team2.size() ){
+        
+            threadsTeam2.get(startedAttacksTeam2).start();
+            startedAttacksTeam2++;
+            
+        }
+        
+        // Percorre os dois vetores de Threads, esperando a finalização de todas
+        for ( int i = 0; i < threadsTeam1.size(); i++ ){
+        
+            threadsTeam1.get(i).join();
+        }
+        
+        for ( int i = 0; i < threadsTeam2.size(); i++ ){
+        
+            threadsTeam2.get(i).join();
+        }
+        
+        System.out.println ("\n\n================================== BATTLE FINISHED ==================================\n\n");
+        System.out.println ("==== Result ====");
+        
+        // Chama o método para determinar qual time ganhou a batalha e atualizar seus resultados
+        int result; // Usada para determinar qual time venceu a batalha
+        
+        result = team1.resolveBattle ( team2 );
+        
+        if ( result > 0 )
+            System.out.println ( "\t" + team1.getName() + " venceu a batalha contra " + team2.getName() );
+        
+        else if ( result == 0 )
+            System.out.println ( "\tOcorreu empate na batalha entre " + team1.getName() + " e " + team2.getName() );
+        
+        else
+            System.out.println ( "\t" + team2.getName() + " venceu a batalha contra " + team1.getName() );
+
+        // Atualiza as estatísticas do Time2
+        team2.resolveBattle ( team1 );
+        
+        System.out.println("\n"); 
+    }
 
 	//0000000000000000000000000000000000000000000000000000000000000000000000000
 	//0000000000000000000000000000000000000000000000000000000000000000000000000

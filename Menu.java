@@ -122,7 +122,7 @@ public class Menu {
 		int cmd=0;
 
 			System.out.println("||==========================================||");
-			System.out.println("Digite o nome do personagem a ser selecionado:");
+			System.out.println("Selecione um dos personagens abaixo:");
 			String name;
 			do {
 				name = scan.nextLine();
@@ -258,7 +258,7 @@ public class Menu {
 					selectTeamMenu();
 					break;
 				case 3:
-					battleMenu();
+					mainProgram.battle();
 					break;
 			}
 		}						
@@ -313,10 +313,4 @@ public class Menu {
 			}
 		}
 	}
-
-	public static void battleMenu() {
-
-	}
-
-
 }
