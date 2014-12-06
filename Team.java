@@ -175,7 +175,30 @@ public class Team implements Printable {
         int randomPosition = (int)(characters.size() * Math.random()); // ( retorna um inteiro entre 0 e (tamanho do vetor -1) );
         
         // Retorna o personagem na posição aleatória
-        return characters.get(randomPosition);
+        GameCharacter randomCharacter = characters.get(randomPosition);
+        
+        if ( !randomCharacter.isDead() )
+            return randomCharacter;
+        
+        // Se o personagem estiver morto, percorre o vetor inteiro a partir do personagem sorteado. Se chegar novamente no personagem inicialmente sorteado, significa que todos os personagens do time estão mortos. Casso isso ocorra, o método retorna null
+        
+        int nextPosition = ( randomPosition + 1 ) % characters.size();
+        
+        while ( nextPosition != randomPosition ){
+        
+            randomCharacter = characters.get(nextPosition);
+            
+            // Se o personagem estiver vivo, retorna ele
+            if ( !randomCharacter.isDead() )
+                return randomCharacter;
+            
+            // Se o personagem estiver morto, tenta o próximo
+            nextPosition = ( nextPosition + 1 ) % characters.size();
+        }
+        
+        // Caso não tenha encontrado um personagem vivo
+        return null;
+        
     }
 
     //Método da interface Printable que imprime as informações do time

@@ -15,8 +15,16 @@ public class Battle{
         // Percorre o time 1, preparando seus personagens para atacar
         for ( int i = 0; i < team1.size(); i++ ){
             
+            GameCharacter characterToAttack = team2.getRandomCharacter();
+            
+            // Se não houver personagens vivos no time2, getRandomCharacter() retorna null. Caso isso ocorra, não é possível batalhar
+            if ( characterToAttack == null ) {
+                System.out.println ("Todos os personagens de " + team2.getName() + " estão mortos. Não é possível iniciar uma batalha.");
+                return;
+            }
+            
             // Prepara a thread para o ataque do personagem
-            AttackThread newAttackThread = new AttackThread( team1.searchChar(i), team2.getRandomCharacter() );
+            AttackThread newAttackThread = new AttackThread( team1.searchChar(i), characterToAttack );
             
             // Insere a thread no vetor de threads do time 1
             threadsTeam1.add( newAttackThread );
@@ -25,8 +33,16 @@ public class Battle{
         // Percorre o time 2, preparando seus personagens para atacar
         for ( int i = 0; i < team2.size(); i++ ){
             
+            GameCharacter characterToAttack = team1.getRandomCharacter();
+            
+            // Se não houver personagens vivos no time1, getRandomCharacter() retorna null. Caso isso ocorra, não é possível batalhar
+            if ( characterToAttack == null ) {
+                System.out.println ("Todos os personagens de " + team1.getName() + " estão mortos. Não é possível iniciar uma batalha.");
+                return;
+            }
+            
             // Prepara a thread para o ataque do personagem
-            AttackThread newAttackThread = new AttackThread( team2.searchChar(i), team1.getRandomCharacter() );
+            AttackThread newAttackThread = new AttackThread( team2.searchChar(i), characterToAttack );
             
             // Insere a thread no vetor de threads do time 1
             threadsTeam2.add( newAttackThread );
@@ -111,11 +127,9 @@ public class Battle{
         
         Knight sephirot = new Knight ("Sephirot", 20);
         Wizard jenova = new Wizard ("Jenova", 25);
-        Wizard hojo = new Wizard ("Professor Hojo", 26);
-        Thief rufus = new Thief ("Rufus", 8);
         
         // Atribuição de pontos nos atributos dos personagens
-        cloud.addXP (30);
+        cloud.addXP (2);
         cloud.setStrength (30);
         cloud.setSpeed (30);
         cloud.setConstitution (20);
@@ -139,29 +153,17 @@ public class Battle{
         caitSith.setConstitution (15);
         caitSith.setDexterity (10);
         
-        sephirot.addXP (30);
+        sephirot.addXP (50);
         sephirot.setStrength (30);
         sephirot.setSpeed (30);
         sephirot.setConstitution (20);
         sephirot.setDexterity (20);
         
-        jenova.addXP (5);
+        jenova.addXP (50);
         jenova.setStrength (20);
         jenova.setSpeed (25);
         jenova.setConstitution (25);
         jenova.setDexterity (20);
-        
-        hojo.addXP (3);
-        hojo.setStrength (10);
-        hojo.setSpeed (15);
-        hojo.setConstitution (20);
-        hojo.setDexterity (20);
-        
-        rufus.addXP (1);
-        rufus.setStrength (20);
-        rufus.setSpeed (15);
-        rufus.setConstitution (25);
-        rufus.setDexterity (20);
         
         // Declaração e instanciamento de 2 times
         Team avalanche = new Team ("Avalanche", Color.green);
@@ -175,10 +177,14 @@ public class Battle{
         
         blackMateria.addChar (sephirot);
         blackMateria.addChar (jenova);
-        blackMateria.addChar (hojo);
-        blackMateria.addChar (rufus);
         
         // Inicia a batalha
+        startBattle ( avalanche, blackMateria );
+        
+        startBattle ( avalanche, blackMateria );
+        
+        startBattle ( avalanche, blackMateria );
+        
         startBattle ( avalanche, blackMateria );
     }
     

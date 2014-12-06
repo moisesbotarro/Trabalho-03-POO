@@ -23,6 +23,10 @@ public class AttackThread implements Runnable{
     // Método que dará partida na Thread
     public void start (){
     
+        // Se o personagem que irá atacar estiver morto, não inicia a thread
+        if ( attacker.isDead() )
+            return;
+        
         System.out.println ( attacker.getName() + " se preparando para atacar " + attacked.getName() );
         
         t = new Thread (this, threadName );
@@ -57,7 +61,7 @@ public class AttackThread implements Runnable{
         }
         
         // O próximo bloco deve ser executada em sequência, sem ser interrompido - Realiza o ataque
-        synchronized(this) {
+        synchronized(attacked) {
         
             // Verifica se o personagem ainda está vivo
             if ( !attacker.isDead() ){
