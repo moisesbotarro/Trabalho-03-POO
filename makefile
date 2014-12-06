@@ -4,7 +4,7 @@ all:
 	@echo "Compilação Concluida"
 	
 run:
-	@java ProgramaPrincipal
+	@java mainProgram
 	
 clean:
 	@rm *.class
