@@ -214,9 +214,9 @@ public class Team implements Printable {
         System.out.println ( "\n===== TEAM INFO ======" );
         System.out.println ( "Nome: " + this.getName() );
         System.out.println ( "Cor: " + this.getColor() );
-        System.out.println ( "Numero de derrotas" + this.lose );
-        System.out.println ( "Numero de vitórias" + this.win );
-        System.out.println ( "Numero de derrotas" + this.draw );
+        System.out.println ( "Numero de derrotas: " + this.lose );
+        System.out.println ( "Numero de vitórias: " + this.win );
+        System.out.println ( "Numero de empates: " + this.draw );
         
         int i=1;
 
