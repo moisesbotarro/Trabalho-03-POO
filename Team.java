@@ -59,7 +59,7 @@ public class Team implements Printable {
             this.win++;
             
             // Os personagens do time que venceu ganham 1 ponto de experiência cada, desde que o personagem esteja vivo
-            for ( int i = 0; i < character.size(); i++ ) {
+            for ( int i = 0; i < characters.size(); i++ ) {
                 
                 if ( !characters.get(i).isDead() )
                     characters.get(i).addXP(1);
