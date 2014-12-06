@@ -65,7 +65,7 @@ public class AttackThread implements Runnable{
                 // Verifica se o alvo ainda está vivo
                 if ( attacked.isDead() ){
                     
-                    System.out.println ( "----| " + attacker.getName() + " não pode atacar " + attacked.getName() + " porque " + attacked.getName() + " está morto." );
+                    System.out.println ( "-----| " + attacker.getName() + " não pode atacar " + attacked.getName() + " porque " + attacked.getName() + " está morto." );
                     return; // Termina a thread
                 }
                 
@@ -74,6 +74,23 @@ public class AttackThread implements Runnable{
             }
         }
         
+    }
+    
+    // Método join para chamar o join() da thread criada por AttackThread
+    public void join(){
+    
+        // Deve-se verificar se já foi iniciada uma thread
+        if ( t != null ){
+            
+            try{
+            
+                t.join();
+                
+            } catch ( InterruptedException e ){
+            
+                // Não é necessário tratar a exceção nesse contexto
+            }
+        }
     }
     
     public static void main ( String args[] ){
