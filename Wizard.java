@@ -46,20 +46,25 @@ public class Wizard extends GameCharacter implements Printable{
         this.wisdom += moreWisdom;
     }
 
+    public int getWisdom() {
+
+        return wisdom;
+    }
+
     //Método da interface Printable que imprime as características de um wizard
     public void print () {
 
         System.out.println ( "\n===== WIZARD INFO ======" );
-        System.out.println ( "Nome: " + alias );
-        System.out.println ( "HP: " + HP );
-        System.out.println ( "MP: " + MP );
-        System.out.println ( "XP: " + XP );
-        System.out.println ( "Stregth: " + strength );
-        System.out.println ( "Speed: " + getSpeed() );
-        System.out.println ( "Dexterity: " + dexterity );
-        System.out.println ( "Constitution: " + constitution );
-        System.out.println ( "Wisdom " + wisdom );
-        System.out.println ( "Nro. de Armas Equipadas: " + howManyEquippedWeapons() );
-        System.out.println ( "Nro. de Armaduras Equipadas: " + howManyEquippedArmors() + '\n');
+        System.out.println ( "Nome: " + this.getName() );
+        System.out.println ( "HP: " + this.getHP());
+        System.out.println ( "MP: " + this.getMP());
+        System.out.println ( "XP: " + this.getXP());
+        System.out.println ( "Stregth: " + this.getStrength());
+        System.out.println ( "Speed: " + this.getSpeed() );
+        System.out.println ( "Dexterity: " + this.getDexterity());
+        System.out.println ( "Constitution: " + this.getConstitution());
+        System.out.println ( "Wisdom " + this.getWisdom());
+        System.out.println ( "Nro. de Armas Equipadas: " + this.howManyEquippedWeapons() );
+        System.out.println ( "Nro. de Armaduras Equipadas: " + this.howManyEquippedArmors() + '\n');
     }
 }

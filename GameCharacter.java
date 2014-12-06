@@ -50,6 +50,11 @@ public abstract class GameCharacter implements Printable {
         
         return this.alias;
     }
+
+    public Inventory getInventory() {
+
+        return myItems;
+    }
     
     // Calcula os pontos de defesa do personagem. Deve ser implementado nas classes filhas
     protected abstract int getDefensePoints();
@@ -263,6 +268,27 @@ public abstract class GameCharacter implements Printable {
 
         return MP;
     }
+
+    // Método que retorna a quantidade de XP do personagem
+    public int getXP(){
+
+        return XP;
+    }
+
+    public int getStrength(){
+
+        return strength;
+    }
+
+    public int getDexterity(){
+
+        return dexterity;
+    }
+
+    public int getConstitution(){
+
+        return constitution;
+    }
     
     // Método para adicionar espaço no inventário do personagem
     public void addSpacesInInventory ( int moreSpaces ){
@@ -353,12 +379,6 @@ public abstract class GameCharacter implements Printable {
     public int getItemsDefensePts(){
     
         return myItems.getItemsDefensePts();
-    }
-    
-    // Método para retornar o inventário de um personagem
-    public Inventory getInventory() {
-        
-        return myItems;
     }
     
     // Método auxiliar para imprimir atributos de um personagem
