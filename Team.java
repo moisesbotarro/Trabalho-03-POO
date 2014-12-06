@@ -54,9 +54,16 @@ public class Team implements Printable {
         // Guarda em result a diferença da média de HP dos personagens do time que chama o método em relação ao time B
         double result = this.getPoints() - teamB.getPoints();
         
-        // Caso a média de HP dos personagens do time que chamou o método seja mair -> time que chamou o método venceu
+        // Caso a média de HP dos personagens do time que chamou o método seja maior -> time que chamou o método venceu
         if ( result > 0 ){
             this.win++;
+            
+            // Os personagens do time que venceu ganham 1 ponto de experiência cada, desde que o personagem esteja vivo
+            for ( int i = 0; i < character.size(); i++ ) {
+                
+                if ( !characters.get(i).isDead() )
+                    characters.get(i).addXP(1);
+            }
         }
         
         // Caso a média de HP dos personagens dos dois times seja igual -> Ocorreu empate
@@ -207,9 +214,9 @@ public class Team implements Printable {
         System.out.println ( "\n===== TEAM INFO ======" );
         System.out.println ( "Nome: " + this.getName() );
         System.out.println ( "Cor: " + this.getColor() );
-        System.out.println ( "Numero de derrotas" + this.lose );
-        System.out.println ( "Numero de vitórias" + this.win );
-        System.out.println ( "Numero de derrotas" + this.draw );
+        System.out.println ( "Numero de derrotas: " + this.lose );
+        System.out.println ( "Numero de vitórias: " + this.win );
+        System.out.println ( "Numero de empates: " + this.draw );
         
         int i=1;
 
