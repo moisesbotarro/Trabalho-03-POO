@@ -35,7 +35,7 @@ public class WeaponShop implements Shop, Printable {
             if ( option < 0 || option > 1 ){
                 
                 // Caso ainda não se deseja sair do programa
-                if ( option != -1 ) {
+                if ( option != -1 )
                     System.out.println ("Opção Inválida!!!");
                 
                 continue;
