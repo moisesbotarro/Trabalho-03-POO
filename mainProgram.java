@@ -55,7 +55,7 @@ public class mainProgram {
 
 	}	
 
-	public static void printAllChars()
+//	public static void printAllChars()
 
 	//0000000000000000000000000000000000000000000000000000000000000000000000000
 	//0000000000000000000000000000000000000000000000000000000000000000000000000
@@ -99,7 +99,7 @@ public class mainProgram {
 		System.out.println(" 5 - White");
 		System.out.println(" 6 - Black");
 
-		cmd = scan.nextInt();
+		cmd = Menu.getWishedOption( 1, 6 );
 
 		Team tm;
 
@@ -162,7 +162,7 @@ public class mainProgram {
 		} while(name.equals(""));
 		
 		System.out.print(" -> Power: ");		
-		int power = scan.nextInt();			
+		int power = Menu.getWishedOption( 1, 100 );
 		Knight aux = new Knight(name, power);
 		defineAtributes(aux);
 		avatars.add(aux);
@@ -183,7 +183,7 @@ public class mainProgram {
 		} while(name.equals(""));
 		
 		System.out.print(" -> Wisdom: ");		
-		int wisdom = scan.nextInt();			
+		int wisdom = Menu.getWishedOption( 1, 100 );
 		Wizard aux = new Wizard(name, wisdom);
 		defineAtributes(aux);
 		avatars.add(aux);
@@ -204,7 +204,7 @@ public class mainProgram {
 		} while(name.equals(""));
 
 		System.out.print(" -> Stealth: ");		
-		int stealth = scan.nextInt();			
+		int stealth = Menu.getWishedOption( 1, 100 );
 		Thief aux = new Thief(name, stealth);
 		defineAtributes(aux);
 		avatars.add(aux);
@@ -223,28 +223,75 @@ public class mainProgram {
 
 		Scanner scan = new Scanner( System.in );
 
+        int remainingPoints = aux.getRemainingPoints();
+        System.out.println ( "\nQuantidade de pontos disponíveis para ser distribuído: " + (remainingPoints - 3) );
+        System.out.println ( "\nAinda há mais 3 atributos para serem setados. Casso digite essa quantidade total de pontos, os demais atributos receberão 1." );
 		System.out.print(" -> Strenght: ");
-		int strength = scan.nextInt();
+		int strength = Menu.getWishedOption ( 1, remainingPoints - 3 );
 		aux.setStrength(strength);
+        
+        // Caso usuário tenha digitado a quantidade máxima de pontos dispóveis para strength, redistribui os 3 pontos restantes nos demais atributos
+        if ( strength == (remainingPoints-3) ){
+            
+            aux.setDexterity( 1 );
+            aux.setConstitution( 1 );
+            aux.setSpeed( 1 );
+            
+            System.out.println ( "Dexterity, Constitution e Speed inicializados em 1\n");
+        }
+        
+        else{
+        
+            remainingPoints = aux.getRemainingPoints();
+            System.out.println ("\nQuantidade de pontos disponíveis para ser distribuído: " + (remainingPoints -2)  );
+            System.out.println ( "\nAinda há mais 2 atributos para serem setados. Casso digite essa quantidade total de pontos, os demais atributos receberão 1." );
+            System.out.print(" -> Dexterity: ");
+            int dexterity = Menu.getWishedOption ( 1, remainingPoints - 2 );
+            aux.setDexterity(dexterity);
+            
+            // Caso usuário tenha digitado a quantidade máxima de pontos dispóveis para dexterity, redistribui os 2 pontos restantes nos demais atributos
+            if ( dexterity == (remainingPoints-2) ){
+                
+                aux.setConstitution( 1 );
+                aux.setSpeed( 1 );
+                
+                System.out.println ( "Constitution e Speed inicializados em 1\n");
+            }
 
-		System.out.print(" -> Dexterity: ");
-		int dexterity = scan.nextInt();
-		aux.setDexterity(dexterity);
-
-		System.out.print(" -> Constitution:");
-		int constitution = scan.nextInt();
-		aux.setConstitution(constitution);		
-
-		System.out.print(" -> Speed:");
-		int speed = scan.nextInt();
-		aux.setSpeed(speed);
-
+            else {
+            
+                remainingPoints = aux.getRemainingPoints();
+                System.out.println ("\nQuantidade de pontos disponíveis para ser distribuído: " + (remainingPoints -1) );
+                System.out.println ( "\nAinda há mais 1 atributo para ser setado. Casso digite essa quantidade total de pontos, speed será inicializado em 1." );
+                System.out.print(" -> Constitution: ");
+                int constitution = Menu.getWishedOption ( 1, remainingPoints - 1);
+                aux.setConstitution(constitution);		
+            
+                // Caso usuário tenha digitado a quantidade máxima de pontos dispóveis para Constitution, redistribui o ponto restante em speed
+                if ( constitution == (remainingPoints-1) ){
+                    
+                    aux.setSpeed( 1 );
+                    
+                    System.out.println ( "Speed inicializado em 1\n");
+                }
+                
+                else{
+            
+                    System.out.println ("\nQuantidade de pontos disponíveis para ser distribuído: " + aux.getRemainingPoints() );
+                    System.out.print(" -> Speed: ");
+                    int speed = Menu.getWishedOption ( 1, aux.getRemainingPoints());
+                    aux.setSpeed(speed);
+                    
+                }
+            }
+        }
+        
 		System.out.print(" -> Gold:");
-		int gold = scan.nextInt();
+		int gold = Menu.getWishedOption ( 0, 999999);
 		aux.getInventory().earnGold(gold);
 
 		System.out.print(" -> Spaces:");
-		int spaces = scan.nextInt();
+		int spaces = Menu.getWishedOption ( 0, 999);
 		aux.getInventory().setSpaces(spaces);
 		Menu.clean();
 	} 
