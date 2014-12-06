@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe ManaPotion
  */
 
-public class ManaPotion extends Potion implements Printable{
+public class ManaPotion extends Potion{
 
     /* Métodos */
     

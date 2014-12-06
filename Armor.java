@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe Armor
  */
 
-public class Armor extends Item implements Printable{
+public class Armor extends Item{
 
     /* Atributos */
     protected int defensePts;

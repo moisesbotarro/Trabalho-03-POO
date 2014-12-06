@@ -254,6 +254,12 @@ public abstract class GameCharacter implements Printable {
         return true;
     }
     
+    // Método que retorna a quantidade de pontos que o personagem ainda pode distribuir entre os atributos básicos
+    public int getRemainingPoints(){
+    
+        return 100 - ( strength + speed + dexterity + constitution );
+    }
+    
     /* Método auxiliar para receber dano de outro personagem */
     protected void receiveDamage ( int damage ) {
         

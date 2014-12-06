@@ -4,7 +4,7 @@
  *  Implementação em Java da Classe Weapon
  */
 
-public class Weapon extends Item implements Printable {
+public class Weapon extends Item {
     
     /* Atributos */
     protected int attackPts;
