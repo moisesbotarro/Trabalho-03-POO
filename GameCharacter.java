@@ -85,8 +85,7 @@ public abstract class GameCharacter implements Printable {
         }
         
         if ( miss ) { //Caso haja uma falha de ataque, não realiza o ataque
-            System.out.println ("Falha de ataque de " + getName() );
-            System.out.println ( "-----------------------------------------------------------------" );
+            System.out.println ("---->> Falha de ataque de " + getName() );
             return;
         }
     
@@ -104,21 +103,25 @@ public abstract class GameCharacter implements Printable {
         // Se o ataque for crítico, dobra o dano que será aplicado
         if ( criticalStrike ) {
             damage = damage * 2;
-            System.out.print ("ATAQUE CRITICO!! ");
+            System.out.print (">>>>>> ATAQUE CRITICO!! ");
         }
         
         character2.receiveDamage ( damage );
-        System.out.println (this.getName() + " tirou " + damage + "HP de " + character2.getName() );
+        
+        // O próximo teste é utilizado apenas para controlar o formato de impressão
+        if ( criticalStrike )
+            System.out.println (this.getName() + " tirou " + damage + "HP de " + character2.getName() );
+        
+        else
+             System.out.println ("---->> " + this.getName() + " tirou " + damage + "HP de " + character2.getName() );
         
         // Se o HP do personagem atacado chegou ao fim, indica que ele morreu
         if ( character2.getHP() <= 0 ){
             
-            System.out.println ( character2.getName() + " IS DEAD");
+            System.out.println ( "xx__xx " + character2.getName() + " IS DEAD");
             character2.dead = true;
             character2.HP = 0; // Personagem não pode ter HP negativo. Evita problemas na hora de contabilizar pontos do time.
         }
-        
-        System.out.println ( "-----------------------------------------------------------------" );
     }
     
     

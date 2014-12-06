@@ -1,8 +1,9 @@
 // Classe para Criar uma Thread que representa um personagem atacando outro personagem
 
 import java.util.*;
+import java.lang.*;
 
-public class Attack implements Runnable{
+public class AttackThread implements Runnable{
 
     /* Atributos */
     private Thread t; // Thread que tratará a execução do ataque
@@ -11,7 +12,7 @@ public class Attack implements Runnable{
     private String threadName;
     
     // Construtor da Thread - Recebe o personagem que irá atacar e o personagem que será atacado
-    public Attack( GameCharacter attacker, GameCharacter attacked ){
+    public AttackThread( GameCharacter attacker, GameCharacter attacked ){
         
         this.attacker = attacker;
         this.attacked = attacked;
@@ -31,19 +32,28 @@ public class Attack implements Runnable{
     // Método que executa o ataque na Thread
     public void run() {
     
-
-        System.out.println ( attacker.getName() + " correndo em direção a " + attacked.getName() );
+        System.out.println ( "--> " + attacker.getName() + " correndo em direção a " + attacked.getName() );
         
         // Sorteia um tempo aleatório para o personagem esperar para atacar o outro, entre 0s e 5s
         double randomNumber =  ( 5 ) * ( 1000 * Math.random() ); // O tempo deve estar em milissegundos
         
         try {
         
-            Thread.sleep ((long)randomNumber);
+            synchronized(this){
             
-        } catch ( InterruptedException e ){
+                // Variável usada para verificar se o personagem irá parar por pelo menos 1s
+                int intNumberToCompare = (int)(randomNumber/1000);
             
-            System.out.println( attacker.getName() + "parou para dormir por pelo menos " + (randomNumber/1000) + "segundos" );
+                // Imprime a mensagem apenas se o personagem parou por pelo menos 1s
+                if ( intNumberToCompare != 0 )
+                    System.out.format ( "--x " + attacker.getName() + " parou para descansar por pelo menos %.0f segundos.\n", (randomNumber/1000) );
+                
+                Thread.sleep ((long)randomNumber);
+            }
+            
+        } catch ( InterruptedException e ) {
+        
+            // Não é necessário tratar a exceção nesse contexto
         }
         
         // O próximo bloco deve ser executada em sequência, sem ser interrompido - Realiza o ataque
@@ -55,7 +65,7 @@ public class Attack implements Runnable{
                 // Verifica se o alvo ainda está vivo
                 if ( attacked.isDead() ){
                     
-                    System.out.println ( attacker.getName() + " não pode atacar " + attacked.getName() + " porque " + attacked.getName() + " está morto." );
+                    System.out.println ( "----| " + attacker.getName() + " não pode atacar " + attacked.getName() + " porque " + attacked.getName() + " está morto." );
                     return; // Termina a thread
                 }
                 
@@ -99,8 +109,8 @@ public class Attack implements Runnable{
         caitSith.setConstitution (15);
         caitSith.setDexterity (10);
         
-        Attack attack1 = new Attack ( cloud, cid );
-        Attack attack2 = new Attack ( aeris, caitSith );
+        AttackThread attack1 = new AttackThread ( cloud, cid );
+        AttackThread attack2 = new AttackThread ( aeris, caitSith );
         
         attack1.start();
         attack2.start();
