@@ -45,7 +45,7 @@ public class Team implements Printable {
     
     // Método que retorna em uma string, nome e cor do time
     public String toString(){
-        return "Time: " + name + " Cor: " + color + '\n';
+        return "Time: " + name + " Cor: " + color.getName() + '\n';
     }
     
     // Método para resolver uma batalha com um time com o qual acabou de lutar
@@ -212,8 +212,8 @@ public class Team implements Printable {
     public void print () {
 
         System.out.println ( "\n===== TEAM INFO ======" );
-        System.out.println ( "Nome: " + this.getName() );
-        System.out.println ( "Cor: " + this.getColor() );
+        System.out.println ( "Nome: " + this.name );
+        System.out.println ( "Cor: " + this.color.getName() );
         System.out.println ( "Numero de derrotas: " + this.lose );
         System.out.println ( "Numero de vitórias: " + this.win );
         System.out.println ( "Numero de empates: " + this.draw );
