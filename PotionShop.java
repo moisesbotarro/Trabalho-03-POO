@@ -18,15 +18,21 @@ public class PotionShop implements Shop, Printable {
     // Método para receber o personagem
     public void goShopping( GameCharacter character ){
 
-        System.out.println ("\n======================== POTION SHOP ========================\n");
-            System.out.println ("Seja bem vindo à Potion Shop.");
+        System.out.println ("||============================================================||");
+        System.out.println ("||======================== POTION SHOP =======================||");
+        System.out.println ("||============================================================||");
+        System.out.println ("||Seja bem vindo à Potion Shop.                                 ");
 
         int option;
         
         do {
 
-            System.out.println ("Digite 0 para comprar uma poção. \nDigite 1 para vender um de seus items.\n");
-            System.out.println ("Digite -1 para sair da loja.");
+            System.out.println ("||____________________________________________________________||");
+            System.out.println ("|| Digite 0 para comprar uma poções.                          ||"); 
+            System.out.println ("|| Digite 1 para vender um de seus items.                     ||");
+            System.out.println ("||____________________________________________________________||");            
+            System.out.println ("|| Digite -1 para sair da loja.                               ||");
+            System.out.println ("||============================================================||");
 
             Scanner input = new Scanner ( System.in );
 

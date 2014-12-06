@@ -18,15 +18,21 @@ public class ArmorShop implements Shop, Printable {
     // Método para receber o personagem
     public void goShopping( GameCharacter character ){
 
-        System.out.println ("\n======================== ARMOR SHOP ========================\n");
-            System.out.println ("Seja bem vindo à Armor Shop.");
+        System.out.println ("||============================================================||");
+        System.out.println ("||======================== ARMOR SHOP ========================||");
+        System.out.println ("||============================================================||");
+        System.out.println ("||Seja bem vindo à Armor Shop.                                  ");
 
         int option;
         
         do {
-
-            System.out.println ("Digite 0 para comprar uma armadura. \nDigite 1 para vender um de seus items.\n");
-            System.out.println ("Digite -1 para sair da loja.");
+                                                                                               
+            System.out.println ("||____________________________________________________________||");
+            System.out.println ("|| Digite 0 para comprar uma armadura.                        ||"); 
+            System.out.println ("|| Digite 1 para vender um de seus items.                     ||");
+            System.out.println ("||____________________________________________________________||");            
+            System.out.println ("|| Digite -1 para sair da loja.                               ||");
+            System.out.println ("||============================================================||");
 
             Scanner input = new Scanner ( System.in );
 
