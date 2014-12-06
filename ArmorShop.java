@@ -1,29 +1,29 @@
 import java.util.*;
 
-public class WeaponShop implements Shop, Printable {
+public class ArmorShop implements Shop, Printable {
 
 
     /* Atributos */
-    // Arrray para guardar as armas disponíveis para venda
-    private ArrayList<Weapon> weaponsToSell;
+    // Arrray para guardar as armaduras disponíveis para venda
+    private ArrayList<Armor> armorsToSell;
 
     /* Métodos */
-    public WeaponShop ( ArrayList<Weapon> weaponsToSell ){
+    public ArmorShop ( ArrayList<Armor> armorsToSell ){
         
-        this.weaponsToSell = weaponsToSell;
+        this.armorsToSell = armorsToSell;
     }
 
     // Método para receber o personagem
     public void goShopping( GameCharacter character ){
 
-        System.out.println ("\n======================== WEAPON SHOP ========================\n");
-            System.out.println ("Seja bem vindo à Weapon Shop.");
+        System.out.println ("\n======================== ARMOR SHOP ========================\n");
+            System.out.println ("Seja bem vindo à Armor Shop.");
 
         int option;
         
         do {
 
-            System.out.println ("Digite 0 para comprar uma arma. \nDigite 1 para vender um de seus items.\n");
+            System.out.println ("Digite 0 para comprar uma armadura. \nDigite 1 para vender um de seus items.\n");
             System.out.println ("Digite -1 para sair da loja.");
 
             Scanner input = new Scanner ( System.in );
@@ -49,9 +49,10 @@ public class WeaponShop implements Shop, Printable {
                 buyUsedItem ( character );
 
         } while ( option != -1 );
+
     }
 
-    // Método para vender uma arma a um personagem
+    // Método para vender uma armadura a um personagem
     public void sell( GameCharacter buyer ){
 
         // Variável para armazenar temporariamente o inventário do personagem
@@ -65,7 +66,7 @@ public class WeaponShop implements Shop, Printable {
 
         Scanner entrada = new Scanner (System.in);
 
-        // Imprime as armas disponíveis para venda
+        // Imprime as armaduras disponíveis para venda
         print();
         
         int option;
@@ -76,7 +77,7 @@ public class WeaponShop implements Shop, Printable {
             System.out.printf ("Opção desejada: ");
             option = entrada.nextInt();
 
-            if ( option <= 0 || option > weaponsToSell.size() ){
+            if ( option <= 0 || option > armorsToSell.size() ){
 
                 if ( option != -1)
                     System.out.println ("Opção Indisponível. Escolha uma possível entre as listadas");
@@ -84,24 +85,22 @@ public class WeaponShop implements Shop, Printable {
                 continue;
             }
 
-            // Arma escolhida pelo usuário
-            Weapon selectedWeapon = weaponsToSell.get( option - 1 );
+            // Armadura escolhida pelo usuário
+            Armor selectedArmor = armorsToSell.get( option - 1 );
 
             // Verifica se há dinheiro disponível para comprar
-            if ( selectedWeapon.getPrice() > inventory.getTotalGold() ){
-                System.out.println ( buyer.getName() + " não tem dinheiro suficiente para comprar " + selectedWeapon.getName() );
+            if ( selectedArmor.getPrice() > inventory.getTotalGold() ){
+                System.out.println ( buyer.getName() + " não tem dinheiro suficiente para comprar " + selectedArmor.getName() );
                 continue;
             }
 
-            // Se há dinheiro disponível, compra a arma e a coloca no inventário do personagem, sem equipá-la
-            inventory.spendGold ( selectedWeapon.getPrice() );
-            inventory.insertItem ( selectedWeapon );
+            // Se há dinheiro disponível, compra a armadura e a coloca no inventário do personagem, sem equipá-la
+            inventory.spendGold ( selectedArmor.getPrice() );
+            inventory.insertItem ( selectedArmor );
 
-            System.out.println ("Obrigado pela compra!! " + selectedWeapon.getName() + " já está no inventário de " + buyer.getName() +"\n");
+            System.out.println ("Obrigado pela compra!! " + selectedArmor.getName() + " já está no inventário de " + buyer.getName() +"\n");
         
         } while ( option != -1 );
-
-
     }
 
     // Método para comprar um item do personagem
@@ -142,16 +141,16 @@ public class WeaponShop implements Shop, Printable {
     }
 
 
-    // Imprime as armas disponíves na loja para compra
+    // Imprime as armaduras disponíves na loja para compra
     public void print(){
 
-        System.out.println ("\t\tAVAILABLE WEAPONS:");
+        System.out.println ("\t\tAVAILABLE ARMORS:");
 
         int i = 1;
 
-        for ( Weapon weapon : weaponsToSell ){
+        for ( Armor armor : armorsToSell ){
             System.out.println ("Opção " + i + ":");
-            weapon.print();
+            armor.print();
             System.out.println();
             i++;
         }
@@ -165,20 +164,20 @@ public class WeaponShop implements Shop, Printable {
         inventory.setSpaces(10);
         inventory.earnGold(300000);
         
-        Weapon ultimaW = new Weapon ("UltimaWeapon Sword", 9999, 9, 10.5);
-        Weapon wizardS = new Weapon ("Wizard Staff", 8000, 5, 8.5);
-        Weapon stlPhone = new Weapon ("Starlight Phone", 6000, 6, 5.5);
+        Armor bronzeB = new Armor ("Bronze Bangle", 100, 4, 20);
+        Armor ironB = new Armor ("Iron Bangle", 160, 5, 19.5);
+        Armor titanB = new Armor ("Titan Bangle", 280, 7, 17.5 );
         HealthPotion hpPotion = new HealthPotion ("HP Potion", 10, 10);
 
         
         cloud.storeItem ( hpPotion );
-        ArrayList<Weapon> loja = new ArrayList<Weapon>();
-        loja.add( ultimaW );
-        loja.add( wizardS );
-        loja.add( stlPhone );
+        ArrayList<Armor> loja = new ArrayList<Armor>();
+        loja.add( bronzeB );
+        loja.add( ironB );
+        loja.add( titanB );
         
-        WeaponShop weaponShop = new WeaponShop ( loja );
+        ArmorShop armorShop = new ArmorShop ( loja );
         
-        weaponShop.goShopping ( cloud );
+        armorShop.goShopping ( cloud );
     }
 }

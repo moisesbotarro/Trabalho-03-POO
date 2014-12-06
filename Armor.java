@@ -127,7 +127,7 @@ public class Armor extends Item implements Printable{
 
         System.out.println ( "\n\t===== ARMOR INFO ======" );
         System.out.println ( "\tNome: " + this.getName() );
-        System.out.println ( "\tPreço: " + this.getPrice );
+        System.out.println ( "\tPreço: " + this.getPrice() );
         System.out.println ( "\tPontos de DeFesa: " + this.getDefensePts() );
         System.out.println ( "\tWeight: " + this.getWeight() );
     }
