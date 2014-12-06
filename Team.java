@@ -1,12 +1,6 @@
-/*
- *  Aluno: Moisés Botarro Ferraz Silva
- *  N. USP: 8504135
- *  Implementação em Java da Classe Team
- */
-
 import java.util.*;
 
-public class Team{
+public class Team implements Printable {
 
     /* Atributos */
     private String name;
@@ -167,4 +161,29 @@ public class Team{
         
         return characters.get(charPosition);
     }
+
+    //Metodo que retorna a cor do time
+    public Color getColor() {
+
+        return this.color;
+    }
+
+    //Método da interface Printable que imprime as informações do time
+    public void print () {
+
+        System.out.println ( "\n===== TEAM INFO ======" );
+        System.out.println ( "Nome: " + this.getName() );
+        System.out.println ( "Cor: " + this.getColor() );
+        System.out.println ( "Numero de derrotas" + this.lose );
+        System.out.println ( "Numero de vitórias" + this.win );
+        System.out.println ( "Numero de derrotas" + this.draw );
+        
+        int i=1;
+
+        for (GameCharacter character : characters ) 
+        {
+            System.out.println ("Personagem " + i + ": " + character.getName());
+        }
+    }
+    
 }
