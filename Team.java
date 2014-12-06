@@ -168,6 +168,16 @@ public class Team implements Printable {
         return this.color;
     }
 
+    // Método que retorna um personagem aleatório do time para ser atacado
+    public GameCharacter getRandomCharacter() {
+        
+        // Variável para receber uma posição aleatória para acessar no vetor de characters
+        int randomPosition = (int)(characters.size() * Math.random()); // ( retorna um inteiro entre 0 e (tamanho do vetor -1) );
+        
+        // Retorna o personagem na posição aleatória
+        return characters.get(randomPosition);
+    }
+
     //Método da interface Printable que imprime as informações do time
     public void print () {
 
@@ -185,5 +195,4 @@ public class Team implements Printable {
             System.out.println ("Personagem " + i + ": " + character.getName());
         }
     }
-    
 }
