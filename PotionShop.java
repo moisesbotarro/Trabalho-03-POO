@@ -1,31 +1,31 @@
 import java.util.*;
 
-// Classe que implementa uma venda para Armors
+// Classe que implementa uma venda para Potions
 
-public class ArmorShop implements Shop, Printable {
+public class PotionShop implements Shop, Printable {
 
 
     /* Atributos */
-    // Arrray para guardar as armaduras disponíveis para venda
-    private ArrayList<Armor> armorsToSell;
+    // Arrray para guardar os potions disponíveis para venda
+    private ArrayList<Potion> potionsToSell;
 
     /* Métodos */
-    public ArmorShop ( ArrayList<Armor> armorsToSell ){
+    public PotionShop ( ArrayList<Potion> potionsToSell ){
         
-        this.armorsToSell = armorsToSell;
+        this.potionsToSell = potionsToSell;
     }
 
     // Método para receber o personagem
     public void goShopping( GameCharacter character ){
 
-        System.out.println ("\n======================== ARMOR SHOP ========================\n");
-            System.out.println ("Seja bem vindo à Armor Shop.");
+        System.out.println ("\n======================== POTION SHOP ========================\n");
+            System.out.println ("Seja bem vindo à Potion Shop.");
 
         int option;
         
         do {
 
-            System.out.println ("Digite 0 para comprar uma armadura. \nDigite 1 para vender um de seus items.\n");
+            System.out.println ("Digite 0 para comprar uma poção. \nDigite 1 para vender um de seus items.\n");
             System.out.println ("Digite -1 para sair da loja.");
 
             Scanner input = new Scanner ( System.in );
@@ -35,9 +35,9 @@ public class ArmorShop implements Shop, Printable {
             if ( option < 0 || option > 1 ){
                 
                 // Caso ainda não se deseja sair do programa
-                if ( option != -1 )
+                if ( option != -1 ) 
                     System.out.println ("Opção Inválida!!!");
-    
+                    
                 continue;
             }
 
@@ -51,7 +51,7 @@ public class ArmorShop implements Shop, Printable {
 
     }
 
-    // Método para vender uma armadura a um personagem
+    // Método para vender uma potion a um personagem
     public void sell( GameCharacter buyer ){
 
         // Variável para armazenar temporariamente o inventário do personagem
@@ -65,7 +65,7 @@ public class ArmorShop implements Shop, Printable {
 
         Scanner entrada = new Scanner (System.in);
 
-        // Imprime as armaduras disponíveis para venda
+        // Imprime as potions disponíveis para venda
         print();
         
         int option;
@@ -76,7 +76,7 @@ public class ArmorShop implements Shop, Printable {
             System.out.printf ("Opção desejada: ");
             option = entrada.nextInt();
 
-            if ( option <= 0 || option > armorsToSell.size() ){
+            if ( option <= 0 || option > potionsToSell.size() ){
 
                 if ( option != -1)
                     System.out.println ("Opção Indisponível. Escolha uma possível entre as listadas");
@@ -84,20 +84,20 @@ public class ArmorShop implements Shop, Printable {
                 continue;
             }
 
-            // Armadura escolhida pelo usuário
-            Armor selectedArmor = armorsToSell.get( option - 1 );
+            // Potion escolhida pelo usuário
+            Potion selectedPotion = potionsToSell.get( option - 1 );
 
             // Verifica se há dinheiro disponível para comprar
-            if ( selectedArmor.getPrice() > inventory.getTotalGold() ){
-                System.out.println ( buyer.getName() + " não tem dinheiro suficiente para comprar " + selectedArmor.getName() );
+            if ( selectedPotion.getPrice() > inventory.getTotalGold() ){
+                System.out.println ( buyer.getName() + " não tem dinheiro suficiente para comprar " + selectedPotion.getName() );
                 continue;
             }
 
-            // Se há dinheiro disponível, compra a armadura e a coloca no inventário do personagem, sem equipá-la
-            inventory.spendGold ( selectedArmor.getPrice() );
-            inventory.insertItem ( selectedArmor );
+            // Se há dinheiro disponível, compra a potion e a coloca no inventário do personagem, sem usá-la
+            inventory.spendGold ( selectedPotion.getPrice() );
+            inventory.insertItem ( selectedPotion );
 
-            System.out.println ("Obrigado pela compra!! " + selectedArmor.getName() + " já está no inventário de " + buyer.getName() +"\n");
+            System.out.println ("Obrigado pela compra!! " + selectedPotion.getName() + " já está no inventário de " + buyer.getName() +"\n");
         
         } while ( option != -1 );
     }
@@ -141,16 +141,16 @@ public class ArmorShop implements Shop, Printable {
     }
 
 
-    // Imprime as armaduras disponíves na loja para compra
+    // Imprime os potions disponíves na loja para compra
     public void print(){
 
-        System.out.println ("\t\tAVAILABLE ARMORS:");
+        System.out.println ("\t\tAVAILABLE POTIONS:");
 
         int i = 1;
 
-        for ( Armor armor : armorsToSell ){
+        for ( Potion potion : potionsToSell ){
             System.out.println ("Opção " + i + ":");
-            armor.print();
+            potion.print();
             System.out.println();
             i++;
         }
@@ -164,20 +164,25 @@ public class ArmorShop implements Shop, Printable {
         inventory.setSpaces(10);
         inventory.earnGold(300000);
         
-        Armor bronzeB = new Armor ("Bronze Bangle", 100, 4, 20);
-        Armor ironB = new Armor ("Iron Bangle", 160, 5, 19.5);
-        Armor titanB = new Armor ("Titan Bangle", 280, 7, 17.5 );
         HealthPotion hpPotion = new HealthPotion ("HP Potion", 10, 10);
-
+        HealthPotion hiPotion = new HealthPotion ("Hi-Potion", 20, 20);
+        HealthPotion xPotion = new HealthPotion ("X-Potion", 50, 30);
+        HealthPotion elixir = new HealthPotion ("Elixir", 100, 50);
+        
+        ManaPotion mpPotion = new ManaPotion ("MP Potion", 100, 10);
+        ManaPotion ether = new ManaPotion ("Ether", 500, 20);
         
         cloud.storeItem ( hpPotion );
-        ArrayList<Armor> loja = new ArrayList<Armor>();
-        loja.add( bronzeB );
-        loja.add( ironB );
-        loja.add( titanB );
+        ArrayList<Potion> loja = new ArrayList<Potion>();
+        loja.add( hpPotion );
+        loja.add( hiPotion );
+        loja.add( xPotion );
+        loja.add( elixir );
+        loja.add( mpPotion );
+        loja.add( ether );
         
-        ArmorShop armorShop = new ArmorShop ( loja );
+        PotionShop potionShop = new PotionShop ( loja );
         
-        armorShop.goShopping ( cloud );
+        potionShop.goShopping ( cloud );
     }
 }

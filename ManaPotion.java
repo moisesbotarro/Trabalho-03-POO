@@ -32,7 +32,7 @@ public class ManaPotion extends Potion implements Printable{
 
         System.out.println ( "\n\t===== MANA POTION INFO ======" );
         System.out.println ( "\tNome: " + this.getName() );
-        System.out.println ( "\tPreço: " + this.getPrice );
+        System.out.println ( "\tPreço: " + this.getPrice() );
         System.out.println ( "\tRestore Points: " + this.getDefensePts() );
     }
 }

@@ -1,5 +1,7 @@
 import java.util.*;
 
+// Classe que implementa uma venda para Weapons
+
 public class WeaponShop implements Shop, Printable {
 
 
@@ -35,10 +37,7 @@ public class WeaponShop implements Shop, Printable {
                 // Caso ainda não se deseja sair do programa
                 if ( option != -1 ) {
                     System.out.println ("Opção Inválida!!!");
-                    continue;
-                }
                 
-                // Caso tenha sido digitado o código para sair da loja
                 continue;
             }
 
@@ -129,6 +128,7 @@ public class WeaponShop implements Shop, Printable {
             Item itemToSell = null;
             itemToSell = inventory.searchItem ( itemName );
 
+            // Se o personagem não possui o item digitado
             if ( itemToSell == null ){
                 System.out.println ("Item " + itemName + " não está no inventário de " + seller.getName() + "\n");
                 continue;
