@@ -395,6 +395,37 @@ public class mainProgram {
 		potionShop.goShopping(ch);
 	}
 
+	//Função que verifica se os personagens da batalha possuem ao menos 1 arma e 1 armadura equipadas e mais uma poção.
+	public static boolean verifyCharactersInventory(Team t1) {
+
+		for (int i=0; i<t1.size(); i++)
+		{
+			if (t1.searchChar(i).howManyEquippedWeapons()<1 || t1.searchChar(i).howManyEquippedArmors()<1)
+			{
+				System.out.println ("ERRO - PERSONAGEM NÃO SEGUE AS ESPECIFICAÇÕES (1 ARMA/1 ARMADURA)");
+				return false;
+			}
+			//Percorre inventário procurando poção (poção retorna -1 em attack points)
+			Inventory in = t1.searchChar(i).getInventory();
+			boolean potion = false;
+			for (int j=0; j<(in.getSpaces()-in.getAvailableSpace()); j++)
+			{
+				if (in.searchItem(j).getAttackPts() == -1)
+				{
+					potion = true;
+					break;
+				}
+			}
+			//Caso o personagem não tenha nenhuma poção
+			if (potion==false)
+			{
+				System.out.println("ERRO - PERSONAGEM NÃO SEGUE AS ESPECIFICAÇÕES (1 POÇÃO)");
+				return false;
+			}
+		}
+		return true;
+	}
+
 	//Inicia uma batalha entre dois times
 	public static void battle () {
 
@@ -446,7 +477,7 @@ public class mainProgram {
 			return;
 		}
 
-		if (teams.get(index1).size()>0 && teams.get(index2).size()>0) {
+		if (teams.get(index1).size()>2 && teams.get(index2).size()>2 && verifyCharactersInventory(teams.get(index1)) && verifyCharactersInventory(teams.get(index2))) {
 
 			//Inicia a batalha entre times
 			startBattle(teams.get(index1), teams.get(index2));
@@ -454,7 +485,9 @@ public class mainProgram {
 
 		else {
 
-			System.out.println("ERRO - OS TIMES DEVEM TER NO MÍNIMO UM PERSONAGEM CADA");
+			System.out.println("ERRO - OS TIMES DEVEM TER NO MÍNIMO 3 PERSONAGENS CADA E CADA PERSONAGEM");
+			System.out.println("DEVE TER UMA ARMADURA E ARMA EQUIPADA, MAIS UMA POÇÃO");
+			return;
 		}
 
 	}
