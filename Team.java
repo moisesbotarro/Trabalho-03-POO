@@ -234,11 +234,13 @@ public class Team implements Printable {
     
     //Método que imprime todos os personagens do time com indice
     public void printIndex() {
+        
         int i=0;
+        
         for(GameCharacter ch : characters)
         {
             System.out.println(" " + i + " - " + ch.getName());
             i++;
         }
-    }
+    }   
 }
