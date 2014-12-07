@@ -386,15 +386,24 @@ public class Inventory implements Printable {
         System.out.println ("Espaço total do inventário: " + spaces );
         System.out.println ("Espaço ainda disponível no inventário: " + getAvailableSpace() );
         
-        System.out.println ("\nITENS DO INVENTARIO:");
+        // Verifica se inventário possui itens para ser impressos
+        if ( items.size() > 0 ){
         
-        for ( GenericPair<Item, Boolean> pair : items ) {
+            System.out.println ("\nITENS DO INVENTARIO:");
             
-            // Chama o método de impressão das informações de cada Item. É específico de cada item especializado
-            pair.getFirst().print();
-            System.out.println ("\tEquipado: " + pair.getSecond() );
+            for ( GenericPair<Item, Boolean> pair : items ) {
+                
+                // Chama o método de impressão das informações de cada Item. É específico de cada item especializado
+                pair.getFirst().print();
+                System.out.println ("\tEquipado: " + pair.getSecond() );
+            }
+            System.out.println ("\n");
         }
-        System.out.println ("\n");
+        
+        else{
+            
+            System.out.println ("Personagem ainda não possui itens em seu inventário");
+        }
     }
     
     /* Método auxliar que imprime somente o nome dos itens com sua posição do ArrayList*/
