@@ -12,60 +12,52 @@ public class mainProgram {
 	public static PotionShop potionshop; 
 
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Metodo adiciona um personagem em um time
 	public static void addCharTeam(Team tm) {
 
 		Scanner scan = new Scanner( System.in );
-		String char_name;		
-		System.out.println("Digite o nome do personagem a ser adicionado:");
-		do {
-			char_name = scan.nextLine();
-		} while(char_name.equals(""));
+		int index = 0;	
+		System.out.println("Selecione o personagem a ser inserido: ");
 
-		GameCharacter ch = searchAvatar(char_name);
+		//Imprime todos os personagens que ainda NÃO estão em times
+		printAllAvatars();
 
-		if(ch!=null) {
-			tm.addChar(ch);
-		}
-		else {
-			System.out.println ("ERRO - PERSONAGEM NÃO EXISTE !");
-		}
+		index = Menu.getWishedOption ( 0, avatars.size()-1);
+
+		//Adiciona personagem em time
+		tm.addChar(avatars.get(index));
+		//Remove personagem da lista avatars
+		avatars.remove(index);
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Remove um personagem de um time
 	public static void removeCharTeam(Team tm) {
 
 		Scanner scan = new Scanner( System.in );
-		String char_name;
+		int index=0;
 
-		System.out.println("Digite o nome do personagem a ser removido:");
-		do {
-			char_name = scan.nextLine();
-		} while(char_name.equals(""));
-		
-		GameCharacter ch = searchAvatar(char_name);
+		//Imprime personagens do time
+		System.out.println("Selecione o personagem a ser removido");
+		tm.printIndex();
 
-		if(ch!=null) {
-			tm.removeChar(ch);
-		}
+		//Seleciona um dos personagens
+		index = Menu.getWishedOption ( 0, avatars.size()-1);
+
+		//Adiciona novamente na lista avatars (personagem se torna disponível para outro time), e remove do time
+		avatars.add(tm.searchChar(index));
+		tm.removeChar(index);
 
 		Menu.clean();
 
 	}	
 
-//	public static void printAllChars()
-
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Imprime as informações de um determinado time
 	public static void listTeam(Team tm) {
 
 		tm.print();
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Procura por um time a partir do nome
 	public static Team searchTeam(String name) {
 
 		for(int i=0; i<teams.size(); i++)
@@ -78,8 +70,7 @@ public class mainProgram {
 		return null;
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Método que cria um novo time
 	public static void createTeam() {
 
 		int cmd;
@@ -91,6 +82,7 @@ public class mainProgram {
 			team_name = scan.nextLine();
 		} while(team_name.equals(""));
 		
+		//Selecionar cor do time
 		System.out.println("Selecione a cor do time: ");
 		System.out.println(" 1 - Blue");
 		System.out.println(" 2 - Red");
@@ -103,37 +95,37 @@ public class mainProgram {
 
 		Team tm;
 
+		//Define cor do time
 		switch (cmd) {
 			case 1:
-				tm = new Team(team_name, Color.blue);
+				tm = new Team(team_name, Color.BLUE);
 				teams.add(tm);
 				break;
 			case 2:
-				tm = new Team(team_name, Color.red);
+				tm = new Team(team_name, Color.RED);
 				teams.add(tm);
 				break;
 			case 3:
-				tm = new Team(team_name, Color.green);
+				tm = new Team(team_name, Color.GREEN);
 				teams.add(tm);
 				break;
 			case 4:
-				tm = new Team(team_name, Color.yellow);
+				tm = new Team(team_name, Color.YELLOW);
 				teams.add(tm);
 				break;
 			case 5:
-				tm = new Team(team_name, Color.white);
+				tm = new Team(team_name, Color.WHITE);
 				teams.add(tm);
 				break;
 			case 6:
-				tm = new Team(team_name, Color.black);
+				tm = new Team(team_name, Color.BLACK);
 				teams.add(tm);
 				break;
 		}
 		Menu.clean();			
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Métod procura por um determinado personagem na list avatars a partir do nome
 	public static GameCharacter searchAvatar(String name)
 	{
 		for (int i =0; i<avatars.size(); i++)
@@ -147,8 +139,7 @@ public class mainProgram {
 	}	
 
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Cria um personagem do tipo Knight
 	public static void createKnight() {
 
 		Scanner scan = new Scanner( System.in );
@@ -164,12 +155,13 @@ public class mainProgram {
 		System.out.print(" -> Power: ");		
 		int power = Menu.getWishedOption( 1, 100 );
 		Knight aux = new Knight(name, power);
+		//Método que define atributos comuns a todos os tipos de personagens
 		defineAtributes(aux);
+		//Adiciona peronagem na list avatars
 		avatars.add(aux);
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Cria um personagem do tipo Wizard
 	public static void createWizard() {
 
 		Scanner scan = new Scanner( System.in );
@@ -185,12 +177,13 @@ public class mainProgram {
 		System.out.print(" -> Wisdom: ");		
 		int wisdom = Menu.getWishedOption( 1, 100 );
 		Wizard aux = new Wizard(name, wisdom);
+		//Método que define atributos comuns a todos os tipos de personagens
 		defineAtributes(aux);
+		//Adiciona peronagem na lista avatars
 		avatars.add(aux);
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Cria um personagem do tipo Thief
 	public static void createThief() {
 
 		Scanner scan = new Scanner( System.in );
@@ -206,19 +199,46 @@ public class mainProgram {
 		System.out.print(" -> Stealth: ");		
 		int stealth = Menu.getWishedOption( 1, 100 );
 		Thief aux = new Thief(name, stealth);
+		//Método que define atributos comuns a todos os tipos de personagens
 		defineAtributes(aux);
+		//Adiciona peronagem na lista avatars
 		avatars.add(aux);
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Equipa um item com base no personagem e no nome do item
 	public static void EquipItem(GameCharacter aux, String name) {
 
 		aux.equipItem(name);
 	}	
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Imprime todos os times do jogo com índice
+	public static void printAllTeams() {
+
+		int i=0;
+
+		for (Team team : teams) {
+			
+			System.out.println(" " + i + " - " + team.getName());
+			i++;
+		}
+
+	}
+
+	//Imprime todos os personagens presentes na 
+	public static void printAllAvatars() {
+
+		int i=0;
+
+		for (GameCharacter ch : avatars) {
+			
+			System.out.println(" " + i + " - " + ch.getName());
+			i++;
+		}
+
+	}
+
+
+	//Define atributos comuns a todos os tipos de personagens (speed, dexterity, constitution, strenght...)
 	public static void defineAtributes (GameCharacter aux) {
 
 		Scanner scan = new Scanner( System.in );
@@ -296,35 +316,32 @@ public class mainProgram {
 		Menu.clean();
 	} 
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Chama a função print de varios tipos da interface Printable
 	public static void printInfo(Printable aux) {
 
 		aux.print();
 		return;
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Chama o método que abre a loja de weapons
 	public static void weaponShopping(GameCharacter ch) {
 
 		weaponshop.goShopping(ch);
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//Chama o método que abre a loja de armors
 	public static void armorShopping(GameCharacter ch) {
 
 		armorshop.goShopping(ch);
 	}
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+	//chama o metodo que abre a loja de potions
 	public static void potionShopping(GameCharacter ch) {
 
 		potionshop.goShopping(ch);
 	}
 
+	//Inicia uma batalha entre dois times
 	public static void battle () {
 
 		Scanner scan = new Scanner( System.in );
@@ -339,6 +356,7 @@ public class mainProgram {
 
 		System.out.println("Selecione primeiro time da batalha: ");
 		
+		//Imprime lista dos times para a batalha (time 1)
 		for (int i=0; i<teams.size(); i++)
 		{
 			System.out.println( i + " - " + teams.get(i).getName());
@@ -352,6 +370,7 @@ public class mainProgram {
 			return;
 		}
 
+		//Imprime lista dos times para a batalha (time 2)
 		for (int i=0; i<teams.size(); i++)
 		{
 			if(i!=index1) {
@@ -367,10 +386,12 @@ public class mainProgram {
 			return;
 		}
 
+		//Inicia a batalha entre times
 		startBattle(teams.get(index1), teams.get(index2));
 
 	}
 
+	//Função cria itens para as lojas. 
 	public static void fillLists() {
 
 		Armor ar1, ar2, ar3, ar4, ar5;
@@ -398,6 +419,7 @@ public class mainProgram {
 		hp4 = new HealthPotion("Conjurer's Potion", 400, 45);
 		hp5 = new HealthPotion("Enchanter's Potion", 500, 100);
 
+		//Adiciona itens nas lista a serem enviadas para as lojas
 		WeaponList.add(we1);
 		WeaponList.add(we2);
 		WeaponList.add(we3);
@@ -418,7 +440,8 @@ public class mainProgram {
 
 	}
 
-	public static void startBattle ( Team team1, Team team2 ){
+	// Método para inciar a batalhe entre dois times, passados como parâmetro
+    public static void startBattle ( Team team1, Team team2 ){
     
         // Vetor de Threads para gerenciar os ataques do Time 1
         ArrayList<AttackThread> threadsTeam1 = new ArrayList<AttackThread>( team1.size() );
@@ -429,8 +452,16 @@ public class mainProgram {
         // Percorre o time 1, preparando seus personagens para atacar
         for ( int i = 0; i < team1.size(); i++ ){
             
+            GameCharacter characterToAttack = team2.getRandomCharacter();
+            
+            // Se não houver personagens vivos no time2, getRandomCharacter() retorna null. Caso isso ocorra, não é possível batalhar
+            if ( characterToAttack == null ) {
+                System.out.println ("Todos os personagens de " + team2.getName() + " estão mortos. Não é possível iniciar uma batalha.");
+                return;
+            }
+            
             // Prepara a thread para o ataque do personagem
-            AttackThread newAttackThread = new AttackThread( team1.searchChar(i), team2.getRandomCharacter() );
+            AttackThread newAttackThread = new AttackThread( team1.searchChar(i), characterToAttack );
             
             // Insere a thread no vetor de threads do time 1
             threadsTeam1.add( newAttackThread );
@@ -439,8 +470,16 @@ public class mainProgram {
         // Percorre o time 2, preparando seus personagens para atacar
         for ( int i = 0; i < team2.size(); i++ ){
             
+            GameCharacter characterToAttack = team1.getRandomCharacter();
+            
+            // Se não houver personagens vivos no time1, getRandomCharacter() retorna null. Caso isso ocorra, não é possível batalhar
+            if ( characterToAttack == null ) {
+                System.out.println ("Todos os personagens de " + team1.getName() + " estão mortos. Não é possível iniciar uma batalha.");
+                return;
+            }
+            
             // Prepara a thread para o ataque do personagem
-            AttackThread newAttackThread = new AttackThread( team2.searchChar(i), team1.getRandomCharacter() );
+            AttackThread newAttackThread = new AttackThread( team2.searchChar(i), characterToAttack );
             
             // Insere a thread no vetor de threads do time 1
             threadsTeam2.add( newAttackThread );
@@ -515,14 +554,14 @@ public class mainProgram {
         System.out.println("\n"); 
     }
 
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
-	//0000000000000000000000000000000000000000000000000000000000000000000000000
+    //Função principal. Inicia o jogo e abre o menu
 	public static void main (String args[]) throws Exception {
 
 	Scanner scan = new Scanner( System.in );
 	
 	int cmd=1;
 
+	//Inicialização de atributos auxiliares usados durante o jogo
 	avatars = new ArrayList<GameCharacter>();
 	teams = new ArrayList<Team>();
 	ArmorList = new ArrayList<Armor>();
@@ -533,8 +572,10 @@ public class mainProgram {
 	armorshop = new ArmorShop(ArmorList);
 	potionshop = new PotionShop(PotionList);
 
+	//Cria intes das lojas
 	fillLists();
 
+	//Inicia jogo abrindo menus
 	while (cmd != 0) {
 
 		Menu.mainMenu();

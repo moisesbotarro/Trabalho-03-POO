@@ -4,6 +4,8 @@ public class Menu {
 
 	public Scanner scan = new Scanner( System.in );	
 
+
+	//Método ultilizado para limpar a tela do terminal
 	public static void clean(){
 
 		final String ANSI_CLS = "\u001b[2J";
@@ -52,8 +54,10 @@ public class Menu {
         return inputInt;
     }
 
+    //Imprime o menu principal do jogo
 	public static void mainMenu() {
 
+		//variável para ver o comando que o usuário deseja
 		int cmd=0;
 
 		while (cmd!=-1) {
@@ -67,10 +71,11 @@ public class Menu {
 			System.out.println("|| -1 - Sair                                ||");
 			System.out.println("||==========================================||");
 
-
+			//verifica se o usuário entrou com uma opção válida.
 			cmd = getWishedOption( -1, 1 );
 			clean();
 
+			//Verifica qual a opção selecionada
 			switch (cmd) {
 				case 0:
 					CharacterMenu();
@@ -86,6 +91,7 @@ public class Menu {
 		return;	
 	}
 
+	//Menu de opções para personagens
 	public static void CharacterMenu() {
 
 		int cmd=0;
@@ -106,21 +112,25 @@ public class Menu {
 
 			switch (cmd) {
 				case 0:
+					//Vai para o menu de criação de personagem
 					createCharacterMenu();
 					break;
 				case 1:
+					//Vai para o menu de seleção de personagem
 					selectCharacterMenu();
 					break;
 			}
 		}
 	}
 
+	//
 	public static void createCharacterMenu() {
 
 		int cmd=0;
 
 		while (cmd!=-1) {
 
+			//Exibe os tipos de personagens possíveis para criação
 			System.out.println("||==========================================||");
 			System.out.println("||Selecione o tipo de personagem:           ||");
 			System.out.println("||__________________________________________||");
@@ -136,20 +146,25 @@ public class Menu {
 
 			switch (cmd) {
 				case 0:
+					//Vai para a função de criação de Knight, na classe mainProgram
 					mainProgram.createKnight();
 					break;
 				case 1:
+					//Vai para a função de criação de Wizard, na classe mainProgram
 					mainProgram.createWizard();
 					break;
 				case 2:
+					//Vai para a função de criação de Thief, na classe mainProgram
 					mainProgram.createThief();
 					break;
 			}
 		}
 	}
 
+	//Menu para selecionar um personagem
 	public static void selectCharacterMenu() {
 
+		//Scanner necessário para E/S
 		Scanner scan = new Scanner( System.in );			
 
 		int cmd=0;
@@ -157,67 +172,86 @@ public class Menu {
 			System.out.println("||==========================================||");
 			System.out.println("Selecione um dos personagens abaixo:");
 			String name;
+			
+			//Necessário para ler uma String com nextLine (pode ter mais de uma palavra)
 			do {
 				name = scan.nextLine();
 			} while(name.equals(""));
+
 			System.out.println("||==========================================||");
 			clean();
 			
+			//ch recebe o personagem com o nome cujo usuário entrou
 			GameCharacter ch = mainProgram.searchAvatar(name);
 			
+			//Caso o personagem não exista
 			if (ch==null) {
 				System.out.println("ERRO - PERSONAGEM NÃO EXISTE !");
 				return;
 			}
 
 			clean();
+
+			//Uma vez verificada a existência de um personagem, podemos continuar com a função
+			//Caso o personagem não exista, o último If apresentará o erro.
+
 			while (cmd!=-1) {
 			
-			System.out.println(">>Personagem Selecionado: " + name + "\n");
-			System.out.println("||==========================================||");
-			System.out.println("||Selecione uma das opções:                 ||");
-			System.out.println("||__________________________________________||");			
-			System.out.println("|| 0 - Imprimir atributos                   ||");
-			System.out.println("|| 1 - Imprimir inventário                  ||");
-			System.out.println("|| 2 - Ir a uma loja (vender/comprar itens) ||");
-			System.out.println("|| 3 - Equipar/Usar itens                   ||");
-			System.out.println("||__________________________________________||");
-			System.out.println("|| -1 - Voltar                              ||");
-			System.out.println("||==========================================||");			
+				//Menu para um personagem selecionado
+				System.out.println(">>Personagem Selecionado: " + name + "\n");
+				System.out.println("||==========================================||");
+				System.out.println("||Selecione uma das opções:                 ||");
+				System.out.println("||__________________________________________||");			
+				System.out.println("|| 0 - Imprimir atributos                   ||");
+				System.out.println("|| 1 - Imprimir inventário                  ||");
+				System.out.println("|| 2 - Ir a uma loja (vender/comprar itens) ||");
+				System.out.println("|| 3 - Equipar/Usar itens                   ||");
+				System.out.println("||__________________________________________||");
+				System.out.println("|| -1 - Voltar                              ||");
+				System.out.println("||==========================================||");			
 
-			cmd = getWishedOption( -1, 3 );
-			clean();
+				cmd = getWishedOption( -1, 3 );
+				clean();
 
-			switch (cmd) {
-				case 0:
-					mainProgram.printInfo(ch);
-					break;
-				case 1:
-					if (ch.getInventory() == null || ch.getInventory().getSpaces()==ch.getInventory().getAvailableSpace()) {
-						System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
-					}
-					else {
-						mainProgram.printInfo(ch.getInventory()); 
-					}
-					break;
-				case 2:
-					ShoppingMenu(ch);
-					break;
-				case 3:
-					EquipUseMenu(ch);
-					if (ch.getInventory() == null) {
-						System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
-						return;
-					}
-					break;
-			}
+				//Opções para a seleção de um personagem
+				switch (cmd) {
+					case 0:
+						//Chama a função printInfo da classe mainProgram, que imprime as características de um personagem
+						mainProgram.printInfo(ch);
+						break;
+					case 1:
+						//Imprime o inventário de um personagem. Porém, o personagem deve ter um inventário com no mínimo um item
+						//Portanto verificamos se o número de espaços livres é igual ao número de espaços totais.
+						if (ch.getInventory().getSpaces()==ch.getInventory().getAvailableSpace()) {
+							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
+						}
+						//Caso o inventário não esteja vazio, chama-se a função printInfo da classe mainProgram, que imprime o inventário
+						else {
+							mainProgram.printInfo(ch.getInventory()); 
+						}
+						break;
+					case 2:
+						//Abre o menu de opções para compras
+						ShoppingMenu(ch);
+						break;
+					case 3:
+						//Abre o menu para equipar itens. Antes verifica se o inventário não está vazio.
+						EquipUseMenu(ch);
+						if (ch.getInventory().getSpaces()==ch.getInventory().getAvailableSpace()) {
+							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
+							return;
+						}
+						break;
+				}
 		}
 	}
 
+	//Menu de opções para compras e vendas (deve receber um personagem como parâmetro)
 	public static void ShoppingMenu(GameCharacter ch) {
 
 		int cmd=0;
 
+		//Opções de escolher a loja
 		System.out.println("||==========================================||");
 		System.out.println("||Selecione uma das opções:                 ||");
 		System.out.println("||__________________________________________||");
@@ -231,39 +265,50 @@ public class Menu {
 		cmd = getWishedOption( -1, 2 );
 		clean();
 
+		//Abre a função respectiva de cada loja. Todas na classe mainProgram. O personagem deve ser mandado como parâmetro
 		switch(cmd) {
 			case 0:
+				//Loja de weapons
 				mainProgram.weaponShopping(ch);
 				break; 
 			case 1:
+				//Loja de armors
 				mainProgram.armorShopping(ch);
 				break;
 			case 2:
+				//Loja de potions
 				mainProgram.potionShopping(ch);
 				break;
 		}
 	}
 
+	//Menu para equipar ou desequipar um item
 	public static void EquipUseMenu(GameCharacter aux) {
 
 		Scanner scan = new Scanner( System.in );
-		String item_name;	
+		int index;
+		String item_name;
 
-		System.out.println ("Digite o nome do item a ser equipado");
-		do {
-			item_name = scan.nextLine();
-		} while(item_name.equals(""));
+		System.out.println("Selecione um item do personagem: " + aux.getName());
 
-		mainProgram.EquipItem(aux, item_name);
+		//Método imprime todos os nomes dos itens do inventário
+		aux.getInventory().printIndex();
+		index = getWishedOption( 0, aux.getInventory().getSpaces()-aux.getInventory().getAvailableSpace());
+
+		//Chama uma função na classe mainProgram que equipa um item
+		mainProgram.EquipItem(aux, aux.getInventory().searchItem(index).getName());
 		clean();
 	}
 
+
+	//Menu para configurações de time
 	public static void TeamMenu () {
 
 		int cmd=0;
 
 		while(cmd!=-1)
 		{
+			//Menu para seleção de opções
 			System.out.println("||==========================================||");
 			System.out.println("||Selecione uma das opções:                 ||");
 			System.out.println("||__________________________________________||");
@@ -274,46 +319,46 @@ public class Menu {
 			System.out.println("|| -1 - Voltar                              ||");
 			System.out.println("||==========================================||");
 
+			//Comandos devem variar de -1 a 2
 			cmd = getWishedOption( -1, 2 );
 			clean();
 
 			switch (cmd) {
 				case 0:
+					//Chama função da classe mainProgram que cria um novo time
 					mainProgram.createTeam();
 					break;
 				case 1:
+					//Abre o menu de seleção de time
 					selectTeamMenu();
 					break;
 				case 2:
+					//Chama a função que inicia uma batalha entre dois times
 					mainProgram.battle();
 					break;
 			}
 		}						
 	}
 
+	//Menu para seleção de time
 	public static void selectTeamMenu() {
 
 		Scanner scan = new Scanner( System.in );
 		String team_name;	
-		int cmd=0;
+		int cmd=0, index=0;
 
-		System.out.println ("Digite o nome do time:");
-		do {
-			team_name = scan.nextLine();
-		} while(team_name.equals(""));
+		//Seleciona um dos times listados
+		System.out.println("Selecione o time abaixo: ");
+		mainProgram.printAllTeams();
 
-		Team tm = mainProgram.searchTeam(team_name);
-			
-		if (tm==null) {
-			System.out.println("ERRO - TIME NÃO EXISTE !");
-			return;
-		}
+		index = getWishedOption( 0, mainProgram.teams.size()-1);
 
 		clean();
 
 		while (cmd!=-1) {
 
-			System.out.println(">>Time Selecionado: " + team_name + "\n");
+			//Menu de informações de um time
+			System.out.println(">>Time Selecionado: " + mainProgram.teams.get(index).getName() + "\n");
 			System.out.println("||==========================================||");
 			System.out.println("||Selecione uma das opções:                 ||");
 			System.out.println("||__________________________________________||");			
@@ -329,13 +374,16 @@ public class Menu {
 
 			switch(cmd) {
 				case 0:
-					mainProgram.listTeam(tm);
+					//Chama uma função da classe mainProgram que imprime os personagens de um time
+					mainProgram.listTeam(mainProgram.teams.get(index));
 					break;
 				case 1:
-					mainProgram.addCharTeam(tm);
+					//Adiciona um personagem ao time
+					mainProgram.addCharTeam(mainProgram.teams.get(index));
 					break;
 				case 2:
-					mainProgram.removeCharTeam(tm);
+					//Remove um personagem do time
+					mainProgram.removeCharTeam(mainProgram.teams.get(index));
 					break;
 			}
 		}
