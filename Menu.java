@@ -346,6 +346,7 @@ public class Menu {
 		if(mainProgram.getTeams().size()==0)
 		{
 			System.out.println("ERRO - NÃO EXISTEM TIMES PARA SEREM SELECIONADOS");
+			return;
 		}
 
 		mainProgram.printAllTeams();
