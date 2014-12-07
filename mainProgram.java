@@ -16,7 +16,14 @@ public class mainProgram {
 	public static void addCharTeam(Team tm) {
 
 		Scanner scan = new Scanner( System.in );
-		int index = 0;	
+		int index = 0;
+
+		if (mainProgram.avatars.size()==0)
+		{
+			System.out.println("ERRO - NÃO EXISTEM MAIS PERSONAGENS");
+			return;
+		}
+
 		System.out.println("Selecione o personagem a ser inserido: ");
 
 		//Imprime todos os personagens que ainda NÃO estão em times
@@ -35,6 +42,12 @@ public class mainProgram {
 
 		Scanner scan = new Scanner( System.in );
 		int index=0;
+
+		if(tm.size()==0)
+		{
+			System.out.println("ERRO - NÃO EXISTEM MAIS PERSONAGENS PARA REMOVER");
+			return;
+		}
 
 		//Imprime personagens do time
 		System.out.println("Selecione o personagem a ser removido");

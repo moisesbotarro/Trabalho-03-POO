@@ -168,27 +168,20 @@ public class Menu {
 		Scanner scan = new Scanner( System.in );			
 
 		int cmd=0;
+		int index=0;
 
 			System.out.println("||==========================================||");
-			System.out.println("Selecione um dos personagens abaixo:");
-			String name;
-			
-			//Necessário para ler uma String com nextLine (pode ter mais de uma palavra)
-			do {
-				name = scan.nextLine();
-			} while(name.equals(""));
+			System.out.println("Selecione um dos personagens abaixo: ");
 
-			System.out.println("||==========================================||");
-			clean();
-			
-			//ch recebe o personagem com o nome cujo usuário entrou
-			GameCharacter ch = mainProgram.searchAvatar(name);
-			
-			//Caso o personagem não exista
-			if (ch==null) {
-				System.out.println("ERRO - PERSONAGEM NÃO EXISTE !");
+			if (mainProgram.avatars.size()==0)
+			{
+				System.out.println("ERRO - NÃO EXISTEM MAIS PERSONAGENS");
 				return;
 			}
+
+			mainProgram.printAllAvatars();
+
+			index = getWishedOption (0, mainProgram.avatars.size()-1);
 
 			clean();
 
@@ -198,7 +191,7 @@ public class Menu {
 			while (cmd!=-1) {
 			
 				//Menu para um personagem selecionado
-				System.out.println(">>Personagem Selecionado: " + name + "\n");
+				System.out.println(">>Personagem Selecionado: " + mainProgram.avatars.get(index).getName() + "\n");
 				System.out.println("||==========================================||");
 				System.out.println("||Selecione uma das opções:                 ||");
 				System.out.println("||__________________________________________||");			
@@ -217,27 +210,27 @@ public class Menu {
 				switch (cmd) {
 					case 0:
 						//Chama a função printInfo da classe mainProgram, que imprime as características de um personagem
-						mainProgram.printInfo(ch);
+						mainProgram.printInfo(mainProgram.avatars.get(index));
 						break;
 					case 1:
 						//Imprime o inventário de um personagem. Porém, o personagem deve ter um inventário com no mínimo um item
 						//Portanto verificamos se o número de espaços livres é igual ao número de espaços totais.
-						if (ch.getInventory().getSpaces()==ch.getInventory().getAvailableSpace()) {
+						if (mainProgram.avatars.get(index).getInventory().getSpaces()==mainProgram.avatars.get(index).getInventory().getAvailableSpace()) {
 							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
 						}
 						//Caso o inventário não esteja vazio, chama-se a função printInfo da classe mainProgram, que imprime o inventário
 						else {
-							mainProgram.printInfo(ch.getInventory()); 
+							mainProgram.printInfo(mainProgram.avatars.get(index).getInventory()); 
 						}
 						break;
 					case 2:
 						//Abre o menu de opções para compras
-						ShoppingMenu(ch);
+						ShoppingMenu(mainProgram.avatars.get(index));
 						break;
 					case 3:
 						//Abre o menu para equipar itens. Antes verifica se o inventário não está vazio.
-						EquipUseMenu(ch);
-						if (ch.getInventory().getSpaces()==ch.getInventory().getAvailableSpace()) {
+						EquipUseMenu(mainProgram.avatars.get(index));
+						if (mainProgram.avatars.get(index).getInventory().getSpaces()==mainProgram.avatars.get(index).getInventory().getAvailableSpace()) {
 							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
 							return;
 						}
@@ -349,6 +342,12 @@ public class Menu {
 
 		//Seleciona um dos times listados
 		System.out.println("Selecione o time abaixo: ");
+		
+		if(mainProgram.teams.size()==0)
+		{
+			System.out.println("ERRO - NÃO EXISTEM TIMES PARA SEREM SELECIONADOS");
+		}
+
 		mainProgram.printAllTeams();
 
 		index = getWishedOption( 0, mainProgram.teams.size()-1);
