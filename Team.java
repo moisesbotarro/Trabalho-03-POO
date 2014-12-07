@@ -224,11 +224,12 @@ public class Team implements Printable {
         System.out.println ( "Numero de vitórias: " + this.win );
         System.out.println ( "Numero de empates: " + this.draw );
         
-        int i=1;
+        int i=0;
 
         for (GameCharacter character : characters ) 
         {
             System.out.println ("Personagem " + i + ": " + character.getName());
+            i++;
         }
     }
     
