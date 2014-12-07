@@ -396,6 +396,18 @@ public class Inventory implements Printable {
         }
         System.out.println ("\n");
     }
+    
+    /* Método auxliar que imprime somente o nome dos itens com sua posição do ArrayList*/
+    public void printIndex() {
+    
+        int i=0;
+        
+        for (GenericPair<Item, Boolean> pair : items)
+        {
+            System.out.println(" " + i + " - " + pair.getFirst().getName() + " - " + pair.getSecond());
+            i++;
+        }
+    }
 }
 
 
