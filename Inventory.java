@@ -382,6 +382,10 @@ public class Inventory implements Printable {
     /* Método auxiliar para imprimir os itens de um inventário */
     public void print() {
         
+        System.out.println ("Total de Gold: " + gold );
+        System.out.println ("Espaço total do inventário: " + spaces );
+        System.out.println ("Espaço ainda disponível no inventário: " + getAvailableSpace() );
+        
         System.out.println ("\nITENS DO INVENTARIO:");
         
         for ( GenericPair<Item, Boolean> pair : items ) {

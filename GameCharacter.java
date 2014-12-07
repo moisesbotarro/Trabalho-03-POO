@@ -121,6 +121,17 @@ public abstract class GameCharacter implements Printable {
             System.out.println ( "xx__xx " + character2.getName() + " IS DEAD");
             character2.dead = true;
             character2.HP = 0; // Personagem não pode ter HP negativo. Evita problemas na hora de contabilizar pontos do time.
+            
+            // Dinheiro que pertencia ao personagem 2
+            double lostGold = character2.getInventory().getTotalGold();
+            
+            // Retira o dinheiro do personagem que morreu
+            character2.getInventory().spendGold ( lostGold );
+            
+            // O personagem que derrotou o character2 ganha todo o dinheiro dele
+            this.myItems.earnGold( lostGold );
+            
+            System.out.println ( this.alias + " tomou os " + lostGold + " de ouro que pertenciam a " + character2.getName() );
         }
     }
     

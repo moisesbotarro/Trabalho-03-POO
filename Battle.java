@@ -134,24 +134,28 @@ public class Battle{
         cloud.setSpeed (30);
         cloud.setConstitution (20);
         cloud.setDexterity (20);
+        cloud.getInventory().earnGold(10);
         
         cid.addXP (5);
         cid.setStrength (25);
         cid.setSpeed (30);
         cid.setConstitution (25);
         cid.setDexterity (10);
+        cid.getInventory().earnGold(20);
         
         aeris.addXP (3);
         aeris.setStrength (10);
         aeris.setSpeed (30);
         aeris.setConstitution (10);
         aeris.setDexterity (20);
+        aeris.getInventory().earnGold(30);
         
         caitSith.addXP (1);
         caitSith.setStrength (20);
         caitSith.setSpeed (25);
         caitSith.setConstitution (15);
         caitSith.setDexterity (10);
+        caitSith.getInventory().earnGold(40);
         
         sephirot.addXP (50);
         sephirot.setStrength (30);
@@ -166,8 +170,8 @@ public class Battle{
         jenova.setDexterity (20);
         
         // Declaração e instanciamento de 2 times
-        Team avalanche = new Team ("Avalanche", Color.green);
-        Team blackMateria = new Team ("Black Materia", Color.black);
+        Team avalanche = new Team ("Avalanche", Color.GREEN);
+        Team blackMateria = new Team ("Black Materia", Color.BLACK);
         
         // Distribuição dos Personagens nos Times
         avalanche.addChar (cloud);
@@ -178,6 +182,20 @@ public class Battle{
         blackMateria.addChar (sephirot);
         blackMateria.addChar (jenova);
         
+        // Impressão dos inventários
+        System.out.println(cloud.getName());
+        cloud.getInventory().print();
+        System.out.println(cid.getName());
+        cid.getInventory().print();
+        System.out.println(aeris.getName());
+        aeris.getInventory().print();
+        System.out.println(caitSith.getName());
+        caitSith.getInventory().print();
+        System.out.println(sephirot.getName());
+        sephirot.getInventory().print();
+        System.out.println(jenova.getName());
+        jenova.getInventory().print();
+        
         // Inicia a batalha
         startBattle ( avalanche, blackMateria );
         
@@ -186,6 +204,22 @@ public class Battle{
         startBattle ( avalanche, blackMateria );
         
         startBattle ( avalanche, blackMateria );
+        
+        // Impressão dos inventários
+        System.out.println(cloud.getName());
+        cloud.getInventory().print();
+        System.out.println(cid.getName());
+        cid.getInventory().print();
+        System.out.println(aeris.getName());
+        aeris.getInventory().print();
+        System.out.println(caitSith.getName());
+        caitSith.getInventory().print();
+        System.out.println(sephirot.getName());
+        sephirot.getInventory().print();
+        System.out.println(jenova.getName());
+        jenova.getInventory().print();
+        
+        
     }
     
 
