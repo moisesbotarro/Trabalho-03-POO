@@ -34,7 +34,7 @@ public class WeaponShop implements Shop, Printable {
         do {
 
             System.out.println ("||____________________________________________________________||");
-            System.out.println ("|| Digite 0 para comprar uma poções.                          ||"); 
+            System.out.println ("|| Digite 0 para comprar uma arma.                            ||"); 
             System.out.println ("|| Digite 1 para vender um de seus items.                     ||");
             System.out.println ("||____________________________________________________________||");            
             System.out.println ("|| Digite -1 para sair da loja.                               ||");
