@@ -424,24 +424,38 @@ public class mainProgram {
 			return;
 		}
 
+		System.out.println("Selecione primeiro time da batalha: ");
+
 		//Imprime lista dos times para a batalha (time 2)
 		for (int i=0; i<teams.size(); i++)
 		{
 			if(i!=index1) {
 				System.out.println( i + " - " + teams.get(i).getName());
 			}
+			else
+			{
+				System.out.println ("Time " + i + " - " + teams.get(i).getName() + "ja selecionado");
+			}
 		}
 
 		index2 = scan.nextInt();
 
-		if (index2<0 || index2>teams.size())
+		if (index2<0 || index2>teams.size() || index2==index1)
 		{
 			System.out.println ("ERRO - SELEÇÃO INVÁLIDA DE TIME");
 			return;
 		}
 
-		//Inicia a batalha entre times
-		startBattle(teams.get(index1), teams.get(index2));
+		if (teams.get(index1).size()>0 && teams.get(index2).size()>0) {
+
+			//Inicia a batalha entre times
+			startBattle(teams.get(index1), teams.get(index2));
+		}
+
+		else {
+
+			System.out.println("ERRO - OS TIMES DEVEM TER NO MÍNIMO UM PERSONAGEM CADA");
+		}
 
 	}
 
