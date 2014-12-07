@@ -40,16 +40,9 @@ public class ArmorShop implements Shop, Printable {
             System.out.println ("|| Digite -1 para sair da loja.                               ||");
             System.out.println ("||============================================================||");
 
-            Scanner input = new Scanner ( System.in );
+            option = Menu.getWishedOption(-1,1);
 
-            option = input.nextInt();
-
-            if ( option < 0 || option > 1 ){
-                
-                // Caso ainda não se deseja sair do programa
-                if ( option != -1 )
-                    System.out.println ("Opção Inválida!!!");
-    
+            if ( option == -1 ){
                 continue;
             }
 
@@ -75,8 +68,6 @@ public class ArmorShop implements Shop, Printable {
             return;
         }
 
-        Scanner entrada = new Scanner (System.in);
-
         // Imprime as armaduras disponíveis para venda
         print();
         
@@ -86,18 +77,14 @@ public class ArmorShop implements Shop, Printable {
 
             System.out.println ("Gold disponível para compra: " + inventory.getTotalGold() + "\nDigite -1 para voltar ao menu anterior\n");
             System.out.printf ("Opção desejada: ");
-            option = entrada.nextInt();
+            option = Menu.getWishedOption (-1, armorsToSell.size() - 1);
 
-            if ( option <= 0 || option > armorsToSell.size() ){
-
-                if ( option != -1)
-                    System.out.println ("Opção Indisponível. Escolha uma possível entre as listadas");
-
+            if ( option == -1 ){
                 continue;
             }
 
             // Armadura escolhida pelo usuário
-            Armor selectedArmor = armorsToSell.get( option - 1 );
+            Armor selectedArmor = armorsToSell.get( option );
 
             // Verifica se há dinheiro disponível para comprar
             if ( selectedArmor.getPrice() > inventory.getTotalGold() ){
@@ -158,7 +145,7 @@ public class ArmorShop implements Shop, Printable {
 
         System.out.println ("\t\tAVAILABLE ARMORS:");
 
-        int i = 1;
+        int i = 0;
 
         for ( Armor armor : armorsToSell ){
             System.out.println ("Opção " + i + ":");

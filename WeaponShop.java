@@ -40,16 +40,9 @@ public class WeaponShop implements Shop, Printable {
             System.out.println ("|| Digite -1 para sair da loja.                               ||");
             System.out.println ("||============================================================||");
 
-            Scanner input = new Scanner ( System.in );
+            option = Menu.getWishedOption(-1,1);
 
-            option = input.nextInt();
-
-            if ( option < 0 || option > 1 ){
-                
-                // Caso ainda não se deseja sair do programa
-                if ( option != -1 )
-                    System.out.println ("Opção Inválida!!!");
-                
+            if ( option == -1 ){
                 continue;
             }
 
@@ -74,8 +67,6 @@ public class WeaponShop implements Shop, Printable {
             return;
         }
 
-        Scanner entrada = new Scanner (System.in);
-
         // Imprime as armas disponíveis para venda
         print();
         
@@ -85,18 +76,14 @@ public class WeaponShop implements Shop, Printable {
 
             System.out.println ("Gold disponível para compra: " + inventory.getTotalGold() + "\nDigite -1 para voltar ao menu anterior\n");
             System.out.printf ("Opção desejada: ");
-            option = entrada.nextInt();
+            option = Menu.getWishedOption (-1, weaponsToSell.size() - 1);
 
-            if ( option <= 0 || option > weaponsToSell.size() ){
-
-                if ( option != -1)
-                    System.out.println ("Opção Indisponível. Escolha uma possível entre as listadas");
-
+            if ( option == -1 ){
                 continue;
             }
 
             // Arma escolhida pelo usuário
-            Weapon selectedWeapon = weaponsToSell.get( option - 1 );
+            Weapon selectedWeapon = weaponsToSell.get( option );
 
             // Verifica se há dinheiro disponível para comprar
             if ( selectedWeapon.getPrice() > inventory.getTotalGold() ){
@@ -118,14 +105,13 @@ public class WeaponShop implements Shop, Printable {
     // Método para comprar um item do personagem
     public void buyUsedItem ( GameCharacter seller ){
 
-        Scanner input = new Scanner (System.in);
-
         // Variável para armazenar temporariamente o inventário do personagem
         Inventory inventory = seller.getInventory();
 
         System.out.println ("\n\t\tINVENTARIO DE " + seller.getName() );
         inventory.print();
 
+        Scanner input = new Scanner (System.in);
         String itemName;
     
         do  {
@@ -159,7 +145,7 @@ public class WeaponShop implements Shop, Printable {
 
         System.out.println ("\t\tAVAILABLE WEAPONS:");
 
-        int i = 1;
+        int i = 0;
 
         for ( Weapon weapon : weaponsToSell ){
             System.out.println ("Opção " + i + ":");

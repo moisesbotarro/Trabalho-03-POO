@@ -40,16 +40,9 @@ public class PotionShop implements Shop, Printable {
             System.out.println ("|| Digite -1 para sair da loja.                               ||");
             System.out.println ("||============================================================||");
 
-            Scanner input = new Scanner ( System.in );
+            option = Menu.getWishedOption(-1,1);
 
-            option = input.nextInt();
-
-            if ( option < 0 || option > 1 ){
-                
-                // Caso ainda não se deseja sair do programa
-                if ( option != -1 ) 
-                    System.out.println ("Opção Inválida!!!");
-                    
+            if ( option == -1 ){
                 continue;
             }
 
@@ -75,8 +68,6 @@ public class PotionShop implements Shop, Printable {
             return;
         }
 
-        Scanner entrada = new Scanner (System.in);
-
         // Imprime as potions disponíveis para venda
         print();
         
@@ -86,18 +77,14 @@ public class PotionShop implements Shop, Printable {
 
             System.out.println ("Gold disponível para compra: " + inventory.getTotalGold() + "\nDigite -1 para voltar ao menu anterior\n");
             System.out.printf ("Opção desejada: ");
-            option = entrada.nextInt();
+            option = Menu.getWishedOption (-1, potionsToSell.size() - 1);
 
-            if ( option <= 0 || option > potionsToSell.size() ){
-
-                if ( option != -1)
-                    System.out.println ("Opção Indisponível. Escolha uma possível entre as listadas");
-
+            if ( option == -1 ){
                 continue;
             }
 
             // Potion escolhida pelo usuário
-            Potion selectedPotion = potionsToSell.get( option - 1 );
+            Potion selectedPotion = potionsToSell.get( option );
 
             // Verifica se há dinheiro disponível para comprar
             if ( selectedPotion.getPrice() > inventory.getTotalGold() ){
@@ -158,7 +145,7 @@ public class PotionShop implements Shop, Printable {
 
         System.out.println ("\t\tAVAILABLE POTIONS:");
 
-        int i = 1;
+        int i = 0;
 
         for ( Potion potion : potionsToSell ){
             System.out.println ("Opção " + i + ":");
