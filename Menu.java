@@ -173,7 +173,7 @@ public class Menu {
 			System.out.println("||==========================================||");
 			System.out.println("Selecione um dos personagens abaixo: ");
 
-			if (mainProgram.avatars.size()==0)
+			if (mainProgram.getAvatars().size()==0)
 			{
 				System.out.println("ERRO - NÃO EXISTEM MAIS PERSONAGENS");
 				return;
@@ -181,7 +181,7 @@ public class Menu {
 
 			mainProgram.printAllAvatars();
 
-			index = getWishedOption (0, mainProgram.avatars.size()-1);
+			index = getWishedOption (0, mainProgram.getAvatars().size()-1);
 
 			clean();
 
@@ -191,7 +191,7 @@ public class Menu {
 			while (cmd!=-1) {
 			
 				//Menu para um personagem selecionado
-				System.out.println(">>Personagem Selecionado: " + mainProgram.avatars.get(index).getName() + "\n");
+				System.out.println(">>Personagem Selecionado: " + mainProgram.getAvatars().get(index).getName() + "\n");
 				System.out.println("||==========================================||");
 				System.out.println("||Selecione uma das opções:                 ||");
 				System.out.println("||__________________________________________||");			
@@ -210,27 +210,27 @@ public class Menu {
 				switch (cmd) {
 					case 0:
 						//Chama a função printInfo da classe mainProgram, que imprime as características de um personagem
-						mainProgram.printInfo(mainProgram.avatars.get(index));
+						mainProgram.printInfo(mainProgram.getAvatars().get(index));
 						break;
 					case 1:
 						//Imprime o inventário de um personagem. Porém, o personagem deve ter um inventário com no mínimo um item
 						//Portanto verificamos se o número de espaços livres é igual ao número de espaços totais.
-						if (mainProgram.avatars.get(index).getInventory().getSpaces()==mainProgram.avatars.get(index).getInventory().getAvailableSpace()) {
+						if (mainProgram.getAvatars().get(index).getInventory().getSpaces()==mainProgram.getAvatars().get(index).getInventory().getAvailableSpace()) {
 							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
 						}
 						//Caso o inventário não esteja vazio, chama-se a função printInfo da classe mainProgram, que imprime o inventário
 						else {
-							mainProgram.printInfo(mainProgram.avatars.get(index).getInventory()); 
+							mainProgram.printInfo(mainProgram.getAvatars().get(index).getInventory()); 
 						}
 						break;
 					case 2:
 						//Abre o menu de opções para compras
-						ShoppingMenu(mainProgram.avatars.get(index));
+						ShoppingMenu(mainProgram.getAvatars().get(index));
 						break;
 					case 3:
 						//Abre o menu para equipar itens. Antes verifica se o inventário não está vazio.
-						EquipUseMenu(mainProgram.avatars.get(index));
-						if (mainProgram.avatars.get(index).getInventory().getSpaces()==mainProgram.avatars.get(index).getInventory().getAvailableSpace()) {
+						EquipUseMenu(mainProgram.getAvatars().get(index));
+						if (mainProgram.getAvatars().get(index).getInventory().getSpaces()==mainProgram.getAvatars().get(index).getInventory().getAvailableSpace()) {
 							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
 							return;
 						}
@@ -343,21 +343,21 @@ public class Menu {
 		//Seleciona um dos times listados
 		System.out.println("Selecione o time abaixo: ");
 		
-		if(mainProgram.teams.size()==0)
+		if(mainProgram.getTeams().size()==0)
 		{
 			System.out.println("ERRO - NÃO EXISTEM TIMES PARA SEREM SELECIONADOS");
 		}
 
 		mainProgram.printAllTeams();
 
-		index = getWishedOption( 0, mainProgram.teams.size()-1);
+		index = getWishedOption( 0, mainProgram.getTeams().size()-1);
 
 		clean();
 
 		while (cmd!=-1) {
 
 			//Menu de informações de um time
-			System.out.println(">>Time Selecionado: " + mainProgram.teams.get(index).getName() + "\n");
+			System.out.println(">>Time Selecionado: " + mainProgram.getTeams().get(index).getName() + "\n");
 			System.out.println("||==========================================||");
 			System.out.println("||Selecione uma das opções:                 ||");
 			System.out.println("||__________________________________________||");			
@@ -374,15 +374,15 @@ public class Menu {
 			switch(cmd) {
 				case 0:
 					//Chama uma função da classe mainProgram que imprime os personagens de um time
-					mainProgram.listTeam(mainProgram.teams.get(index));
+					mainProgram.listTeam(mainProgram.getTeams().get(index));
 					break;
 				case 1:
 					//Adiciona um personagem ao time
-					mainProgram.addCharTeam(mainProgram.teams.get(index));
+					mainProgram.addCharTeam(mainProgram.getTeams().get(index));
 					break;
 				case 2:
 					//Remove um personagem do time
-					mainProgram.removeCharTeam(mainProgram.teams.get(index));
+					mainProgram.removeCharTeam(mainProgram.getTeams().get(index));
 					break;
 			}
 		}

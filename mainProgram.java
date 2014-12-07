@@ -2,14 +2,55 @@ import java.util.*;
 
 public class mainProgram {
 	
-	public static ArrayList<GameCharacter> avatars;
-	public static ArrayList<Team> teams;
-	public static ArrayList<Armor> ArmorList;
-	public static ArrayList<Weapon> WeaponList;
-	public static ArrayList<Potion> PotionList;
-	public static WeaponShop weaponshop;
-	public static ArmorShop armorshop;
-	public static PotionShop potionshop; 
+	private static ArrayList<GameCharacter> avatars;
+	private static ArrayList<Team> teams;
+	private static ArrayList<Armor> armorList;
+	private static ArrayList<Weapon> weaponList;
+	private static ArrayList<Potion> potionList;
+	private static WeaponShop weaponShop;
+	private static ArmorShop armorShop;
+	private static PotionShop potionShop;
+
+    /* Getters dos Atributos */
+    public static ArrayList<GameCharacter> getAvatars(){
+        
+        return avatars;
+    }
+    
+    public static ArrayList<Team> getTeams(){
+    
+        return teams;
+    }
+    
+    public static ArrayList<Armor> getArmorList(){
+    
+        return armorList;
+    }
+    
+    public static ArrayList<Weapon> getWeaponList(){
+    
+        return weaponList;
+    }
+    
+    public static ArrayList<Potion> getPotionList(){
+    
+        return potionList;
+    }
+    
+    public static WeaponShop getWeaponShop(){
+    
+        return weaponShop;
+    }
+    
+    public static ArmorShop getArmorShop(){
+    
+        return armorShop;
+    }
+    
+    public static PotionShop getPotionShop(){
+    
+        return potionShop;
+    }
 
 
 	//Metodo adiciona um personagem em um time
@@ -339,19 +380,19 @@ public class mainProgram {
 	//Chama o método que abre a loja de weapons
 	public static void weaponShopping(GameCharacter ch) {
 
-		weaponshop.goShopping(ch);
+		weaponShop.goShopping(ch);
 	}
 
 	//Chama o método que abre a loja de armors
 	public static void armorShopping(GameCharacter ch) {
 
-		armorshop.goShopping(ch);
+		armorShop.goShopping(ch);
 	}
 
 	//chama o metodo que abre a loja de potions
 	public static void potionShopping(GameCharacter ch) {
 
-		potionshop.goShopping(ch);
+		potionShop.goShopping(ch);
 	}
 
 	//Inicia uma batalha entre dois times
@@ -433,23 +474,23 @@ public class mainProgram {
 		hp5 = new HealthPotion("Enchanter's Potion", 500, 100);
 
 		//Adiciona itens nas lista a serem enviadas para as lojas
-		WeaponList.add(we1);
-		WeaponList.add(we2);
-		WeaponList.add(we3);
-		WeaponList.add(we4);
-		WeaponList.add(we5);
+		weaponList.add(we1);
+		weaponList.add(we2);
+		weaponList.add(we3);
+		weaponList.add(we4);
+		weaponList.add(we5);
 
-		ArmorList.add(ar1);
-		ArmorList.add(ar2);
-		ArmorList.add(ar3);
-		ArmorList.add(ar4);
-		ArmorList.add(ar5);
+		armorList.add(ar1);
+		armorList.add(ar2);
+		armorList.add(ar3);
+		armorList.add(ar4);
+		armorList.add(ar5);
 
-		PotionList.add(hp1);
-		PotionList.add(hp2);
-		PotionList.add(hp3);
-		PotionList.add(hp4);
-		PotionList.add(hp5);
+		potionList.add(hp1);
+		potionList.add(hp2);
+		potionList.add(hp3);
+		potionList.add(hp4);
+		potionList.add(hp5);
 
 	}
 
@@ -577,13 +618,13 @@ public class mainProgram {
 	//Inicialização de atributos auxiliares usados durante o jogo
 	avatars = new ArrayList<GameCharacter>();
 	teams = new ArrayList<Team>();
-	ArmorList = new ArrayList<Armor>();
-	WeaponList = new ArrayList<Weapon>();
-	PotionList = new ArrayList<Potion>();
+	armorList = new ArrayList<Armor>();
+	weaponList = new ArrayList<Weapon>();
+	potionList = new ArrayList<Potion>();
 
-	weaponshop = new WeaponShop(WeaponList);
-	armorshop = new ArmorShop(ArmorList);
-	potionshop = new PotionShop(PotionList);
+	weaponShop = new WeaponShop(weaponList);
+	armorShop = new ArmorShop(armorList);
+	potionShop = new PotionShop(potionList);
 
 	//Cria intes das lojas
 	fillLists();
