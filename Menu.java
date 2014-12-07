@@ -229,11 +229,11 @@ public class Menu {
 						break;
 					case 3:
 						//Abre o menu para equipar itens. Antes verifica se o inventário não está vazio.
-						EquipUseMenu(mainProgram.getAvatars().get(index));
 						if (mainProgram.getAvatars().get(index).getInventory().getSpaces()==mainProgram.getAvatars().get(index).getInventory().getAvailableSpace()) {
 							System.out.println("PERSONAGEM NÃO POSSUI ITENS !");
 							return;
 						}
+						EquipUseMenu(mainProgram.getAvatars().get(index));
 						break;
 				}
 		}

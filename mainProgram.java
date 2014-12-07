@@ -360,11 +360,11 @@ public class mainProgram {
             }
         }
         
-		System.out.print(" -> Gold:");
+		System.out.print(" -> Gold: ");
 		int gold = Menu.getWishedOption ( 0, 999999);
 		aux.getInventory().earnGold(gold);
 
-		System.out.print(" -> Spaces:");
+		System.out.print(" -> Spaces: ");
 		int spaces = Menu.getWishedOption ( 0, 999);
 		aux.getInventory().setSpaces(spaces);
 		Menu.clean();
