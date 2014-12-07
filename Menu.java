@@ -67,12 +67,13 @@ public class Menu {
 			System.out.println("||__________________________________________||");
 			System.out.println("|| 0 - Configurar personagens               ||");
 			System.out.println("|| 1 - Configurar times                     ||");
+			System.out.println("|| 2 - Criar batalha                        ||");
 			System.out.println("||__________________________________________||");
 			System.out.println("|| -1 - Sair                                ||");
 			System.out.println("||==========================================||");
 
 			//verifica se o usuário entrou com uma opção válida.
-			cmd = getWishedOption( -1, 1 );
+			cmd = getWishedOption( -1, 2 );
 			clean();
 
 			//Verifica qual a opção selecionada
@@ -82,6 +83,9 @@ public class Menu {
 					break;
 				case 1:
 					TeamMenu();
+					break;
+				case 2:
+					mainProgram.battle();
 					break;
 				case -1:
 					System.exit(0);
@@ -307,13 +311,12 @@ public class Menu {
 			System.out.println("||__________________________________________||");
 			System.out.println("|| 0 - Criar time                           ||");
 			System.out.println("|| 1 - Selecionar time                      ||");
-			System.out.println("|| 2 - Iniciar batalha                      ||");
 			System.out.println("||__________________________________________||");
 			System.out.println("|| -1 - Voltar                              ||");
 			System.out.println("||==========================================||");
 
 			//Comandos devem variar de -1 a 2
-			cmd = getWishedOption( -1, 2 );
+			cmd = getWishedOption( -1, 1 );
 			clean();
 
 			switch (cmd) {
@@ -324,10 +327,6 @@ public class Menu {
 				case 1:
 					//Abre o menu de seleção de time
 					selectTeamMenu();
-					break;
-				case 2:
-					//Chama a função que inicia uma batalha entre dois times
-					mainProgram.battle();
 					break;
 			}
 		}						
