@@ -95,7 +95,7 @@ public class mainProgram {
 		tm.printIndex();
 
 		//Seleciona um dos personagens
-		index = Menu.getWishedOption ( 0, team.size()-1);
+		index = Menu.getWishedOption ( 0, tm.size()-1);
 
 		//Adiciona novamente na lista avatars (personagem se torna disponível para outro time), e remove do time
 		avatars.add(tm.searchChar(index));
