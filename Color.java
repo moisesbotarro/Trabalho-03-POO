@@ -1,7 +1,7 @@
 /*
- *  Aluno: Moisés Botarro Ferraz Silva
- *  N. USP: 8504135
- *  Implementação em Java da Enumeração Color
+ *  Trabalho 03
+ *  Alunos: Igor Quintal Mendes,            N. USP: 8622353
+ *          Moisés Botarro Ferraz Silva,    N. USP: 8504135
  */
 
 public enum Color{

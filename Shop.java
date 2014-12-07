@@ -1,3 +1,9 @@
+/*
+ *  Trabalho 03
+ *  Alunos: Igor Quintal Mendes,            N. USP: 8622353
+ *          Moisés Botarro Ferraz Silva,    N. USP: 8504135
+ */
+
 // Interface com os métodos que definem o comportamento de uma loja
 
 interface Shop {

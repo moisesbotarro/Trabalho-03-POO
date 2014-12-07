@@ -1,6 +1,12 @@
-import java.util.*;
+/*
+ *  Trabalho 03
+ *  Alunos: Igor Quintal Mendes,            N. USP: 8622353
+ *          Moisés Botarro Ferraz Silva,    N. USP: 8504135
+ */
 
 // Classe que implementa uma venda para Potions
+
+import java.util.*;
 
 public class PotionShop implements Shop, Printable {
 
